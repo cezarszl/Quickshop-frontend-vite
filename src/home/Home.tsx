@@ -1,5 +1,10 @@
-// import RandomProductsGrid from "@/components/home/RandomProductsGrid";
-import RandomProductsGrid from "@/components/home/RandomProductsGrid";
+import CategoriesGrid from "@/components/home/CategoriesGrid/CategoriesGrid";
+import styles from "./home.module.css";
+
 export default function Home() {
-  return <div className="main-container">{<RandomProductsGrid />}</div>;
+  return (
+    <div className={styles.mainContainer}>
+      <CategoriesGrid />
+    </div>
+  );
 }
