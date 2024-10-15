@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import styles from "./nav.module.css"; // Zmiana na import stylów jako obiekt
 
 interface NavItem {
@@ -7,6 +7,8 @@ interface NavItem {
 }
 
 export default function Nav() {
+  const location = useLocation();
+
   const menuItems: NavItem[] = [
     { name: "HOME", path: "/" },
     { name: "SHOP", path: "/shop" },
@@ -16,8 +18,6 @@ export default function Nav() {
 
   return (
     <div className={styles.navContainer}>
-      {" "}
-      {/* Zastosowanie klas z obiektu styles */}
       <ul className={styles.menuList}>
         {menuItems.map((item: NavItem) => (
           <li key={item.name} className={styles.menuItem}>
@@ -30,7 +30,7 @@ export default function Nav() {
               {item.name}
               <span
                 className={`${styles.activeIndicator} ${
-                  item.path === "/shop" ? styles.active : ""
+                  location.pathname === item.path ? styles.active : ""
                 }`}
               ></span>
             </NavLink>

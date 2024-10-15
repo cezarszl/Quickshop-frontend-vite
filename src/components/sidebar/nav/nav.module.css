@@ -1,8 +1,7 @@
-/* nav.module.css */
-
 .navContainer {
   width: 170px;
-  padding: 60px;
+  padding-left: 60px;
+  padding-bottom: 60px;
 }
 
 .menuList {
@@ -12,33 +11,37 @@
 }
 
 .menuItem {
-  position: relative;
-  margin-bottom: 16px;
+   position: relative;
+   padding: 20px 0 20px 20px;
 }
 
 .menuLink {
   display: block;
-  padding: 8px 16px;
-  font-size: 16px;
+  font-size: 14px;
+  font-weight: 800;
   color: #4B5563;
   text-decoration: none;
-  transition: color 0.2s ease-in-out;
 }
 
 .menuLink:hover {
   color: #FBBF24;
 }
 
-.activeIndicator {
-  position: absolute;
-  left: -20px;
-  top: 50%;
-  height: 2px;
-  background-color: #F97316;
-  transition: width 0.2s ease-in-out;
-  width: 0;
+.menuLink.active .activeIndicator{
+  width: 60px;
 }
 
-.menuItem.active .activeIndicator {
-  width: 36px;
+.activeIndicator {
+  position: absolute;
+  left: -75px;
+  top: 50%;
+  height: 3px;
+  background-color: #FBBF24;
+  transition: width 0.2s ease-in-out;
+  width: 0;
+} 
+
+.menuItem:hover .activeIndicator {
+  width: 60px;
+  color: #FBBF24;
 }
