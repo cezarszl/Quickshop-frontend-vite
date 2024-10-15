@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import axios from 'axios';
 
-const baseUrl = process.env.VITE_API_BASE_URL
+export const baseUrl = import.meta.env.VITE_API_BASE_URL
 
 export interface Product {
     id: string;
