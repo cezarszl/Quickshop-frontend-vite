@@ -2,6 +2,7 @@ import logo from "@/assets/logo.png";
 import { NavLink } from "react-router-dom";
 import NavBar from "./nav/Nav";
 import styles from "./sidebar.module.css"; // Upewnij się, że ten plik istnieje
+import BottomLinks from "./bottomLinks/BottomLinks";
 
 const Sidebar = () => {
   return (
@@ -19,7 +20,9 @@ const Sidebar = () => {
         <button className={styles.newThisWeekButton}> New this week </button>
       </div>
 
-      <div className={styles.bottomLinksContainer}>{/* <BottomLinks /> */}</div>
+      <div className={styles.bottomLinksContainer}>
+        <BottomLinks />
+      </div>
 
       <div className={styles.socialLinksContainer}>{/* <SocialLink /> */}</div>
     </aside>
