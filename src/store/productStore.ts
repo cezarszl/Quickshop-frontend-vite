@@ -1,6 +1,8 @@
 import { create } from 'zustand';
 import axios from 'axios';
 
+const baseUrl = process.env.VITE_API_BASE_URL
+
 export interface Product {
     id: string;
     name: string;
@@ -30,7 +32,7 @@ export const useProductStore = create<ProductState>((set) => ({
     minPrices: [],
     fetchProducts: async () => {
         try {
-            const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL
+
             const response = await axios.get(`${baseUrl}/products`);
             set({ products: response.data })
         } catch (err) {
@@ -39,7 +41,6 @@ export const useProductStore = create<ProductState>((set) => ({
     },
     fetchRandomProducts: async () => {
         try {
-            const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL
             const response = await axios.get(`${baseUrl}/products/random-products`);
             set({ randomProducts: response.data })
         } catch (err) {
@@ -48,7 +49,6 @@ export const useProductStore = create<ProductState>((set) => ({
     },
     fetchMinPrices: async () => {
         try {
-            const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL
             const response = await axios.get(`${baseUrl}/categories/min-prices`);
             set({ minPrices: response.data })
         } catch (err) {
