@@ -1,0 +1,44 @@
+/* nav.module.css */
+
+.navContainer {
+  width: 170px;
+  padding: 60px;
+}
+
+.menuList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menuItem {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.menuLink {
+  display: block;
+  padding: 8px 16px;
+  font-size: 16px;
+  color: #4B5563;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.menuLink:hover {
+  color: #FBBF24;
+}
+
+.activeIndicator {
+  position: absolute;
+  left: -20px;
+  top: 50%;
+  height: 2px;
+  background-color: #F97316;
+  transition: width 0.2s ease-in-out;
+  width: 0;
+}
+
+.menuItem.active .activeIndicator {
+  width: 36px;
+}
