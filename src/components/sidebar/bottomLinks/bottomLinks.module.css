@@ -1,0 +1,27 @@
+.bottomLinks {
+  padding: 2.5rem 50px; 
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.bottomLinksItem {
+  display: flex; 
+  gap: 0.5rem; 
+}
+
+.bottomLinksIcon {
+  color: #6b7280;
+}
+
+.bottomLinksLink {
+  text-decoration: none;
+  font-weight: 800;
+  color: #374151; 
+  transition: color 0.2s; 
+}
+
+.bottomLinksLink:hover {
+  color: #fbbf24; 
+}
