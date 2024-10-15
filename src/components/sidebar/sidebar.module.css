@@ -1,0 +1,49 @@
+.sidebarContainer {
+  width: 320px;
+  height: 100vh; 
+  margin-bottom: 36px; 
+  background-color: white;
+}
+
+.sidebarLogo {
+  max-width: 100%;
+  heigth: auto;
+}
+
+.navbarContainer {
+
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px
+}
+
+.discountButton {
+  background-color: #fbbf24; 
+  color: white;
+  padding: 8px 16px; 
+  width: 100%;
+  border-radius: 8px;
+  border: none;  
+  cursor: pointer; 
+}
+
+.newThisWeekButton {
+  background-color: #000;
+  color: white;
+  padding: 8px 16px; 
+  width: 100%;
+  border-radius: 8px;
+  border: none; 
+  cursor: pointer; 
+}
+
+.bottomLinksContainer {
+  
+}
+
+.socialLinksContainer {
+  
+}
