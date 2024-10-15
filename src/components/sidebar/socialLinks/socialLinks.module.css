@@ -1,0 +1,22 @@
+.socialLinkContainer {
+  padding-top: 2rem; 
+  margin-top: 2rem; 
+  background-color: white;
+}
+
+.socialLinks {
+  display: flex;
+  justify-content: space-around; 
+  list-style-type: none; 
+  padding: 0; 
+  margin: 0; 
+}
+
+.socialLink {
+  color: #6b7280; 
+  transition: color 0.2s ease-in-out; 
+}
+
+.socialLink:hover {
+  color: #fbbf24; 
+}
