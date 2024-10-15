@@ -6,8 +6,8 @@ You can follow the progress of this project and track the features being worked 
 
 ## Demo
 
-<!-- A demo of the project is available at [**QuickShop Frontend**](https://quick-shop-frontend-sandy.vercel.app/). -->
-A live demo will be available soon.
+A demo of the project is available at [**QuickShop Frontend**](https://quickshop-frontend-vite.vercel.app//).
+
 
 ## Tech Stack
 
