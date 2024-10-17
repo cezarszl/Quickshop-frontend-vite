@@ -1,20 +1,16 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import Home from "./home/Home";
-import Shop from "./shop/Shop";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import Layout from "./layout";
 import "./index.css";
+import AppRoutes from "./routes/AppRoutes";
 
 const App = () => {
   return (
     <StrictMode>
       <Router>
         <Layout>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/shop" element={<Shop />} />
-          </Routes>
+          <AppRoutes />
         </Layout>
       </Router>
     </StrictMode>
