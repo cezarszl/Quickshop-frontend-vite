@@ -1,7 +1,8 @@
 import { useEffect, useMemo } from "react";
 import { useProductStore, baseUrl } from "@/store/productStore";
 import styles from "./categoriesGrid.module.css";
-const CategoriesGrid = () => {
+
+const CategoriesGrid: React.FC = () => {
   const { randomProducts, fetchRandomProducts, minPrices, fetchMinPrices } =
     useProductStore();
 

@@ -16,7 +16,7 @@ const socialLinks: SocialLink[] = [
   { name: "Twitter", href: "#", icon: FaTwitter },
 ];
 
-export default function SocialLink() {
+const SocialLink: React.FC = () => {
   return (
     <div className={styles.socialLinkContainer}>
       <ul className={styles.socialLinks}>
@@ -30,4 +30,6 @@ export default function SocialLink() {
       </ul>
     </div>
   );
-}
+};
+
+export default SocialLink;

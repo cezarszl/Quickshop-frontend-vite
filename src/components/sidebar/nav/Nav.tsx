@@ -6,7 +6,7 @@ interface NavItem {
   path: string;
 }
 
-export default function Nav() {
+const Nav: React.FC = () => {
   const location = useLocation();
 
   const menuItems: NavItem[] = [
@@ -39,4 +39,6 @@ export default function Nav() {
       </ul>
     </div>
   );
-}
+};
+
+export default Nav;

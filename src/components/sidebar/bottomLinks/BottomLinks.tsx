@@ -12,7 +12,7 @@ const bottomLinks: BottomLink[] = [
   { icon: "🔍", name: "SEARCH", href: "#" },
 ];
 
-export default function BottomLinks() {
+const BottomLinks: React.FC = () => {
   return (
     <div className={styles.bottomLinks}>
       <ul className={styles.bottomLinksList}>
@@ -27,4 +27,6 @@ export default function BottomLinks() {
       </ul>
     </div>
   );
-}
+};
+
+export default BottomLinks;

@@ -5,7 +5,7 @@ import styles from "./sidebar.module.css"; // Upewnij się, że ten plik istniej
 import BottomLinks from "./bottomLinks/BottomLinks";
 import SocialLink from "./socialLinks/SocialLink";
 
-const Sidebar = () => {
+const Sidebar: React.FC = () => {
   return (
     <aside className={styles.sidebarContainer}>
       <NavLink to="">
