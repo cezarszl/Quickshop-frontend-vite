@@ -1,23 +1,54 @@
 .filterSideBar {
-    padding: 100px 40px 100px 40px;
+    padding: 6.25rem 2.5rem; 
 }
 
-.title {
-    font-size: 1.2rem
-}
-
-.categoryList {
-    padding-top: 30px;
+.categoriesSection, .brandsSection, .colorsSection {
+    padding-top: 1.875rem; 
     margin: 0;
 }
 
-.categoryItem { 
+.categoryItem, .brandsItem {
     list-style: none;
-    padding: 15px;
+    padding-top: 0.7rem; 
+    padding-bottom: 0.7rem; 
     text-transform: capitalize;
     color: rgb(149, 149, 149);
 }
 
-.categoryItem:hover {
-    color: rgb(251, 183, 16)
+.categoryItem:hover, .brandsItem:hover {
+    color: rgb(251, 183, 16);
+}
+
+.brandLabel .checkbox {
+    margin-right: 1rem; 
+}
+
+
+
+.colorsList {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.9375rem; 
+    flex-wrap: wrap;
+}
+
+.colorsItem {
+    display: inline-block;
+}
+
+.colorCircle {
+    display: inline-block;
+    width: 1.25rem; 
+    height: 1.25rem;
+    border-radius: 50%;
+    border: 0.125rem solid #ccc; 
+    cursor: pointer;
+}
+
+.colorList .checkbox {
+    display: none; 
+}
+
+.colorCircle:hover {
+    border-color: #333; /* Zmiana obramowania na hover */
 }
