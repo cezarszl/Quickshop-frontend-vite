@@ -16,20 +16,52 @@ export interface MinPrice {
     categoryId: number;
     minPrice: number;
 }
+
+export interface ProductFilter {
+    name?: string;
+    category?: number;
+    minPrice?: number;
+    maxPrice?: number;
+    limit?: number;
+    offset?: number;
+}
+
 interface ProductState {
     products: Product[],
     randomProducts: Product[],
     minPrices: MinPrice[],
+    filters: ProductFilter,
+    setFilter: (key: keyof ProductFilter, value: any) => void;
+    resetFilters: () => void;
     fetchProducts: () => Promise<void>,
     fetchRandomProducts: () => Promise<void>
     fetchMinPrices: () => Promise<void>
-
+    fetchFilteredProducts: () => Promise<void>;
 }
 
-export const useProductStore = create<ProductState>((set) => ({
+export const useProductStore = create<ProductState>((set, get) => ({
     products: [],
     randomProducts: [],
     minPrices: [],
+    filters: {
+        minPrice: 10,
+        maxPrice: 1000,
+    },
+
+    setFilter: (key, value) => set((state) => ({
+        filters: {
+            ...state.filters,
+            [key]: value,
+        },
+    })),
+
+    resetFilters: () => set({
+        filters: {
+            minPrice: 10,
+            maxPrice: 1000,
+        },
+    }),
+
     fetchProducts: async () => {
         try {
 
@@ -53,6 +85,22 @@ export const useProductStore = create<ProductState>((set) => ({
             set({ minPrices: response.data })
         } catch (err) {
             console.error('Error fetching minimum prices for each category', err);
+        }
+    },
+
+    fetchFilteredProducts: async () => {
+        try {
+            const { filters } = get();
+            const params = new URLSearchParams();
+            Object.entries(filters).forEach(([key, value]) => {
+                if (value !== undefined) {
+                    params.append(key, value.toString());
+                }
+            });
+            const response = await axios.get(`${baseUrl}/products`, { params });
+            set({ products: response.data });
+        } catch (err) {
+            console.error('Error fetching filtered products', err);
         }
     }
 }));
