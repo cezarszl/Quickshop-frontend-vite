@@ -5,12 +5,19 @@
 }
 
 .filterSideBar {
-    background-color: #f5f7fa;
-     width: 230px;
+  background-color: #f5f7fa;
+  width: 230px;
+  flex: 1;
 }
 
 .shopContent {
-  flex-grow: 1; 
-  padding: 20px; 
+  flex: 5; 
+  padding: 5rem; 
   background-color: #f9f9f9;
+}
+
+.productsGrid {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 1rem;
 }
