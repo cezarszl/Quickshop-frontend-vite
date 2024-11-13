@@ -19,7 +19,7 @@ const FilterSidebar: React.FC = () => {
   }, [fetchCategories, fetchBrands]);
 
   const handleCategoryClick = (categoryId: number) => {
-    setFilter("category", categoryId);
+    setFilter("categoryId", categoryId);
     fetchFilteredProducts();
   };
 

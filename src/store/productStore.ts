@@ -19,7 +19,7 @@ export interface MinPrice {
 
 export interface ProductFilter {
     name?: string;
-    category?: number;
+    categoryId?: number;
     minPrice?: number;
     maxPrice?: number;
     limit?: number;
