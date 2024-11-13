@@ -8,6 +8,7 @@ const PriceSlider = () => {
   const [minVal, setMinVal] = useState(filters.minPrice || 10);
   const [maxVal, setMaxVal] = useState(filters.maxPrice || 1000);
 
+  // Debounce api requests
   const debouncedFetch = useCallback(debounce(fetchFilteredProducts, 500), [
     fetchFilteredProducts,
   ]);
