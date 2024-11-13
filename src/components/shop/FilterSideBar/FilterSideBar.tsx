@@ -3,6 +3,7 @@ import styles from "./filterSideBar.module.css";
 import { useCategoryStore } from "@/store/categoryStore";
 import { useBrandStore } from "@/store/brandStore";
 import { useColorStore } from "@/store/colorStore";
+import PriceSlider from "../PriceSlider/PriceSlider";
 
 const FilterSidebar: React.FC = () => {
   const { categories, fetchCategories } = useCategoryStore();
@@ -80,6 +81,11 @@ const FilterSidebar: React.FC = () => {
               </li>
             ))}
           </ul>
+        </div>
+        {/* Price Slider Section */}
+        <div className={styles.priceSliderSection}>
+          <h3 className={styles.title}>Price</h3>
+          <PriceSlider />
         </div>
       </div>
     </div>
