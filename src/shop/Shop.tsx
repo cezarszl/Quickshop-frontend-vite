@@ -11,8 +11,6 @@ const Shop: React.FC = () => {
     fetchProducts();
   }, [fetchProducts]);
 
-  console.log(products);
-
   return (
     <div className={styles.shopContainer}>
       <div className={styles.filterSideBar}>
