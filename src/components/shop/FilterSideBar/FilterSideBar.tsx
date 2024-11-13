@@ -10,7 +10,8 @@ const FilterSidebar: React.FC = () => {
   const { categories, fetchCategories } = useCategoryStore();
   const { brands, fetchBrands } = useBrandStore();
   const { colors, fetchColors } = useColorStore();
-  const { setFilter, fetchFilteredProducts } = useProductStore();
+  const { filters, setFilter, fetchFilteredProducts, toogleBrand } =
+    useProductStore();
 
   useEffect(() => {
     fetchCategories();
@@ -20,6 +21,11 @@ const FilterSidebar: React.FC = () => {
 
   const handleCategoryClick = (categoryId: number) => {
     setFilter("categoryId", categoryId);
+    fetchFilteredProducts();
+  };
+
+  const handleBrandChange = (brandId: number) => {
+    toogleBrand(brandId);
     fetchFilteredProducts();
   };
 
@@ -67,6 +73,8 @@ const FilterSidebar: React.FC = () => {
                     id={`brand-${brand.id}`}
                     value={brand.id}
                     className={styles.checkbox}
+                    checked={filters.brandIds?.includes(brand.id)}
+                    onChange={() => handleBrandChange(brand.id)}
                   />
                   {brand.name}
                 </label>

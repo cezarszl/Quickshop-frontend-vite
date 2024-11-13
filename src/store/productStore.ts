@@ -20,6 +20,8 @@ export interface MinPrice {
 export interface ProductFilter {
     name?: string;
     categoryId?: number;
+    brandIds?: number[];
+    colorId?: number;
     minPrice?: number;
     maxPrice?: number;
     limit?: number;
@@ -31,6 +33,8 @@ interface ProductState {
     randomProducts: Product[],
     minPrices: MinPrice[],
     filters: ProductFilter,
+    selectedBrands: number[];
+    toogleBrand: (brandId: number) => void;
     setFilter: (key: keyof ProductFilter, value: any) => void;
     resetFilters: () => void;
     fetchProducts: () => Promise<void>,
@@ -43,9 +47,28 @@ export const useProductStore = create<ProductState>((set, get) => ({
     products: [],
     randomProducts: [],
     minPrices: [],
+    selectedBrands: [],
     filters: {
         minPrice: 10,
         maxPrice: 1000,
+    },
+
+    toogleBrand: (brandId: number) => {
+        const { selectedBrands } = get();
+        const updatedBrands = selectedBrands.includes(brandId)
+            ? selectedBrands.filter(id => id !== brandId)
+            : [...selectedBrands, brandId];
+
+        set({ selectedBrands: updatedBrands });
+
+        set(state => ({
+            filters: {
+                ...state.filters,
+                brandIds: updatedBrands.length > 0 ? updatedBrands : undefined
+            }
+        }));
+
+        get().fetchFilteredProducts();
     },
 
     setFilter: (key, value) => set((state) => ({
@@ -94,7 +117,11 @@ export const useProductStore = create<ProductState>((set, get) => ({
             const params = new URLSearchParams();
             Object.entries(filters).forEach(([key, value]) => {
                 if (value !== undefined) {
-                    params.append(key, value.toString());
+                    if (key === 'brandIDs' && Array.isArray(value)) {
+                        params.append(key, value.join(','));
+                    } else {
+                        params.append(key, value.toString());
+                    }
                 }
             });
             const response = await axios.get(`${baseUrl}/products`, { params });
