@@ -4,17 +4,24 @@ import { useCategoryStore } from "@/store/categoryStore";
 import { useBrandStore } from "@/store/brandStore";
 import { useColorStore } from "@/store/colorStore";
 import PriceSlider from "../PriceSlider/PriceSlider";
+import { useProductStore } from "@/store/productStore";
 
 const FilterSidebar: React.FC = () => {
   const { categories, fetchCategories } = useCategoryStore();
   const { brands, fetchBrands } = useBrandStore();
   const { colors, fetchColors } = useColorStore();
+  const { setFilter, fetchFilteredProducts } = useProductStore();
 
   useEffect(() => {
     fetchCategories();
     fetchBrands();
     fetchColors();
   }, [fetchCategories, fetchBrands]);
+
+  const handleCategoryClick = (categoryId: number) => {
+    setFilter("category", categoryId);
+    fetchFilteredProducts();
+  };
 
   return (
     <div className={styles.filterSideBarContainer}>
@@ -28,7 +35,11 @@ const FilterSidebar: React.FC = () => {
             aria-labelledby="category-selection"
           >
             {categories.map((category) => (
-              <li key={category.id} className={styles.categoryItem}>
+              <li
+                key={category.id}
+                className={styles.categoryItem}
+                onClick={() => handleCategoryClick(category.id)}
+              >
                 {category.name}
               </li>
             ))}
