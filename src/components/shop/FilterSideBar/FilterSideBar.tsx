@@ -29,6 +29,11 @@ const FilterSidebar: React.FC = () => {
     fetchFilteredProducts();
   };
 
+  const handleColorClick = (colorId: number) => {
+    setFilter("colorId", colorId);
+    fetchFilteredProducts();
+  };
+
   return (
     <div className={styles.filterSideBarContainer}>
       <div className={styles.filterSideBar}>
@@ -96,6 +101,7 @@ const FilterSidebar: React.FC = () => {
                   className={styles.colorCircle}
                   style={{ backgroundColor: color.name.toLocaleUpperCase() }}
                   title={color.name}
+                  onClick={() => handleColorClick(color.id)}
                 ></span>
               </li>
             ))}
