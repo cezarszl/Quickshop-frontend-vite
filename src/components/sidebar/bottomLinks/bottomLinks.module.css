@@ -1,6 +1,6 @@
 .bottomLinks {
-  padding: 2.5rem 50px; 
-  margin-top: 2rem;
+  margin-right: 2.5rem;
+  margin-top: 4rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -9,6 +9,7 @@
 .bottomLinksItem {
   display: flex; 
   gap: 0.5rem; 
+  line-height: 3rem;
 }
 
 .bottomLinksIcon {
@@ -17,9 +18,9 @@
 
 .bottomLinksLink {
   text-decoration: none;
-  font-weight: 800;
   color: #374151; 
   transition: color 0.2s; 
+  font-size: 16px;
 }
 
 .bottomLinksLink:hover {
