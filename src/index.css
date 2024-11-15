@@ -8,7 +8,7 @@
 @font-face {
     font-family: 'helveticaneuemedium';
     src: url("/fonts/helveticaneue_medium-webfont.woff2") format("woff2");
-    font-weight: noraml;
+    font-weight: normal;
     font-style: normal; }
 body {
     font-family: 'helveticaneuemedium', sans-serif;
