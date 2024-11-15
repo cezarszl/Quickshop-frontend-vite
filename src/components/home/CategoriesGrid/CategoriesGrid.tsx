@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { useProductStore, baseUrl } from "@/store/productStore";
 import styles from "./categoriesGrid.module.css";
 
