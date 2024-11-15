@@ -11,12 +11,10 @@ const CategoriesGrid: React.FC = () => {
     fetchMinPrices();
   }, [fetchRandomProducts, fetchMinPrices]);
 
-  const minPricesMap = useMemo(() => {
-    return minPrices.reduce((acc, { categoryId, minPrice }) => {
-      acc[categoryId] = minPrice;
-      return acc;
-    }, {} as Record<number, number>);
-  }, [minPrices]);
+  const minPricesMap = minPrices.reduce((acc, { categoryId, minPrice }) => {
+    acc[categoryId] = minPrice;
+    return acc;
+  }, {} as Record<number, number>);
 
   return (
     <div className={styles.gridContainer}>
