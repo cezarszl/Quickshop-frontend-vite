@@ -34,8 +34,12 @@ interface ProductState {
     minPrices: MinPrice[],
     filters: ProductFilter,
     selectedBrands: number[];
+    sortOption: string;
+    itemsPerPage: number;
     toogleBrand: (brandId: number) => void;
     setFilter: (key: keyof ProductFilter, value: any) => void;
+    setSortOption: (option: string) => void,
+    setItemsPerPage: (count: number) => void,
     resetFilters: () => void;
     fetchProducts: () => Promise<void>,
     fetchRandomProducts: () => Promise<void>
@@ -52,6 +56,8 @@ export const useProductStore = create<ProductState>((set, get) => ({
         minPrice: 10,
         maxPrice: 1000,
     },
+    sortOption: 'name-asc',
+    itemsPerPage: 10,
 
     toogleBrand: (brandId: number) => {
         const { selectedBrands } = get();
@@ -77,6 +83,9 @@ export const useProductStore = create<ProductState>((set, get) => ({
             [key]: value,
         },
     })),
+
+    setSortOption: (option) => set({ sortOption: option }),
+    setItemsPerPage: (count) => set({ itemsPerPage: count }),
 
     resetFilters: () => set({
         filters: {
@@ -113,7 +122,7 @@ export const useProductStore = create<ProductState>((set, get) => ({
 
     fetchFilteredProducts: async () => {
         try {
-            const { filters } = get();
+            const { filters, sortOption, itemsPerPage } = get();
             const params = new URLSearchParams();
             Object.entries(filters).forEach(([key, value]) => {
                 if (value !== undefined) {
@@ -124,6 +133,12 @@ export const useProductStore = create<ProductState>((set, get) => ({
                     }
                 }
             });
+
+            const [sortBy, order] = sortOption.split('-');
+            params.append('sortBy', sortBy);
+            params.append('order', order.toUpperCase());
+            params.append('limit', itemsPerPage.toString());
+
             const response = await axios.get(`${baseUrl}/products`, { params });
             set({ products: response.data });
         } catch (err) {
