@@ -14,9 +14,17 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         className={styles.image}
         width={444}
       />
-      <h3 className={styles.name}>{product.name}</h3>
-      <p className={styles.description}>{product.categoryName}</p>
-      <p className={styles.price}>${product.price.toFixed(2)}</p>
+      <span className={styles.line}></span>
+      <div className={styles.details}>
+        <div>
+          <p className={styles.price}>${product.price.toFixed(2)}</p>
+          <h6 className={styles.name}>{product.name}</h6>
+        </div>
+        <div className={styles.basketWrapper}>
+          <div className={styles.basket}>🛒</div>
+          <span className={styles.tooltip}>Add to Cart</span>
+        </div>
+      </div>
     </div>
   );
 };
