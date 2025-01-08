@@ -1,6 +1,7 @@
 import { useEffect } from "react";
-import { useProductStore, baseUrl } from "@/store/productStore";
+import { useProductStore } from "@/store/productStore";
 import styles from "./categoriesGrid.module.css";
+import axiosInstance from "@/helpers/axiosInstance";
 
 const CategoriesGrid: React.FC = () => {
   const { randomProducts, fetchRandomProducts, minPrices, fetchMinPrices } =
@@ -10,6 +11,8 @@ const CategoriesGrid: React.FC = () => {
     fetchRandomProducts();
     fetchMinPrices();
   }, [fetchRandomProducts, fetchMinPrices]);
+
+  const baseUrl = axiosInstance.defaults.baseURL;
 
   const minPricesMap = minPrices.reduce((acc, { categoryId, minPrice }) => {
     acc[categoryId] = minPrice;
