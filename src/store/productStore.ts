@@ -1,7 +1,5 @@
 import { create } from 'zustand';
-import axios from 'axios';
-
-export const baseUrl = import.meta.env.VITE_API_BASE_URL
+import axiosInstance from '@/helpers/axiosInstance';
 
 export interface Product {
     id: string;
@@ -97,7 +95,7 @@ export const useProductStore = create<ProductState>((set, get) => ({
     fetchProducts: async () => {
         try {
 
-            const response = await axios.get(`${baseUrl}/products`);
+            const response = await axiosInstance.get(`/products`);
             set({ products: response.data })
         } catch (err) {
             console.error('Error fetching products', err);
@@ -105,7 +103,7 @@ export const useProductStore = create<ProductState>((set, get) => ({
     },
     fetchRandomProducts: async () => {
         try {
-            const response = await axios.get(`${baseUrl}/products/random-products`);
+            const response = await axiosInstance.get(`/products/random-products`);
             set({ randomProducts: response.data })
         } catch (err) {
             console.error('Error fetching random products', err);
@@ -113,7 +111,7 @@ export const useProductStore = create<ProductState>((set, get) => ({
     },
     fetchMinPrices: async () => {
         try {
-            const response = await axios.get(`${baseUrl}/categories/min-prices`);
+            const response = await axiosInstance.get(`/categories/min-prices`);
             set({ minPrices: response.data })
         } catch (err) {
             console.error('Error fetching minimum prices for each category', err);
@@ -139,7 +137,7 @@ export const useProductStore = create<ProductState>((set, get) => ({
             params.append('order', order.toUpperCase());
             params.append('limit', itemsPerPage.toString());
 
-            const response = await axios.get(`${baseUrl}/products`, { params });
+            const response = await axiosInstance.get(`/products`, { params });
             set({ products: response.data });
         } catch (err) {
             console.error('Error fetching filtered products', err);
