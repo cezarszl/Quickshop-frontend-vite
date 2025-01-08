@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import axiosInstance from '@/helpers/axiosInstance';
 
 export interface Product {
-    id: string;
+    id: number;
     name: string;
     price: number;
     imageUrl: string;
