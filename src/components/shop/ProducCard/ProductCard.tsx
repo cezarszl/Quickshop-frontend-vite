@@ -1,9 +1,12 @@
-import { Product, baseUrl } from "@/store/productStore";
+import { Product } from "@/store/productStore";
 import styles from "./productCard.module.css";
+import axiosInstance from "@/helpers/axiosInstance";
 
 interface ProductCardProps {
   product: Product;
 }
+
+const baseUrl = axiosInstance.defaults.baseURL;
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
