@@ -74,7 +74,7 @@ const CartPage: React.FC = () => {
             <ul className={styles.summaryTable}>
               <li>
                 <span>subtotal:</span>
-                <span>${getCartTotal()}</span>
+                <span>${getCartTotal().toFixed(2)}</span>
               </li>
               <li>
                 <span>delievery:</span>
@@ -82,13 +82,11 @@ const CartPage: React.FC = () => {
               </li>
               <li>
                 <span>total:</span>
-                <span>${getCartTotal()}</span>
+                <span>${getCartTotal().toFixed(2)}</span>
               </li>
             </ul>
-            <div className={styles.cartBtn}>
-              <a href="/checkout" className={styles.btn}>
-                Checkout
-              </a>
+            <div className={styles.checkoutBtn}>
+              <a href="/checkout">Checkout</a>
             </div>
           </div>
         </div>
