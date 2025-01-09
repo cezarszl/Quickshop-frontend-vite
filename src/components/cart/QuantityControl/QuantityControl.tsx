@@ -1,4 +1,4 @@
-import { FaMinus, FaPlus } from "react-icons/fa";
+import { FaMinus, FaPlus, FaTrash } from "react-icons/fa";
 import styles from "./quantityControl.module.css";
 import { useCartStore } from "@/store/cartStore";
 
@@ -11,6 +11,7 @@ const QuantityControl: React.FC<QuantityControlProps> = ({
   currentQuantity,
 }) => {
   const updateQuantity = useCartStore((state) => state.updateQuantity);
+  const removeItem = useCartStore((state) => state.removeItem);
 
   const handleDecreaseQuantity = async () => {
     if (currentQuantity > 1) {
@@ -32,6 +33,14 @@ const QuantityControl: React.FC<QuantityControlProps> = ({
     }
   };
 
+  const handleRemoveItem = async () => {
+    try {
+      await removeItem(productId);
+    } catch (error) {
+      console.error("Failed to remove item:", error);
+    }
+  };
+
   const handleInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const newQuantity = parseInt(e.target.value);
     if ((!isNaN(newQuantity) && newQuantity >= 1) || newQuantity < 300) {
@@ -45,11 +54,13 @@ const QuantityControl: React.FC<QuantityControlProps> = ({
 
   return (
     <div className={styles.quantityControl}>
+      <p>Qty</p>
       <button onClick={handleDecreaseQuantity} className={styles.qtyBtn}>
         <FaMinus className={styles.qtyIcon} />
       </button>
       <input
         type="number"
+        readOnly
         onChange={handleInputChange}
         className={styles.qtyInput}
         id="qty"
@@ -60,6 +71,9 @@ const QuantityControl: React.FC<QuantityControlProps> = ({
       ></input>
       <button onClick={handleIncreaseQuantity} className={styles.qtyBtn}>
         <FaPlus className={styles.qtyIcon} />
+      </button>
+      <button onClick={handleRemoveItem} className={styles.removeBtn}>
+        <FaTrash />
       </button>
     </div>
   );
