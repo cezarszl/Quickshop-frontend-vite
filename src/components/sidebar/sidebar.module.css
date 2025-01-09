@@ -2,12 +2,10 @@
   width: 320px;
   height: auto; 
   max-width: 320px;
-  margin-bottom: 36px; 
   background-color: white;
 }
 
 .sidebarLogo {
-  margin-bottom: 100px;
   display: block;
   max-width: 100%;
   height: auto;
