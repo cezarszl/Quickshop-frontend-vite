@@ -1,5 +1,5 @@
 .sidebarContainer {
-  width: 320px;
+  min-width: 320px;
   height: auto; 
   max-width: 320px;
   background-color: white;
