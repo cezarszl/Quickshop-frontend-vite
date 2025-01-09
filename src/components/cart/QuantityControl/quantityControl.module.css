@@ -39,13 +39,13 @@
 .qtyInput {
   text-align: center;
   background-color: #f5f7fa;
-  height: 40px;
   width: 20px;
   border: none;
   appearance: textfield;
   color: #242424;
-  font-size: 0.875rem;
-  line-height: 40px;
+  font-size: 1rem;
+  outline: none;
+  pointer-events: none;
 }
 
 .qtyInput::-webkit-outer-spin-button,
