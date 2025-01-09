@@ -1,3 +1,4 @@
+/* Quantity control container */
 .quantityControl {
   display: flex;
   align-items: center;
@@ -5,52 +6,52 @@
   background-color: #f5f7fa;
 }
 
+/* Common button styles */
+.qtyBtn,
+.removeBtn {
+  width: 2rem;
+  height: 2.5rem;
+  background-color: #f5f7fa;
+  border: none;
+  cursor: pointer;
+}
+
+.removeBtn {
+  transition: background-color 0.2s;
+}
+
+/* Quantity display text */
 .quantityControl p {
   margin: 0;
-  line-height: 40px;
-  height: 40px;
-  padding: 0 15px;
-  background-color: #f5f7fa;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  padding: 0 1rem;
   color: #242424;
   font-size: 0.875rem;
+  background-color: #f5f7fa;
 }
 
-.qtyBtn {
-  width: 32px;
-  height: 40px;
-  background-color: #f5f7fa;
-  border: none;
-  cursor: pointer;
-}
-.removeBtn {
-  width: 32px;
-  height: 40px;
-  background-color: #f5f7fa;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  margin: 0 0 0 0px;
-}
-
+/* Icon sizing */
 .qtyIcon {
-  width: 10px;
+  width: 0.625rem;
 }
 
+/* Input field styling */
 .qtyInput {
-  text-align: center;
+  width: 1.25rem;
   background-color: #f5f7fa;
-  width: 20px;
   border: none;
-  appearance: textfield;
   color: #242424;
   font-size: 1rem;
+  text-align: center;
   outline: none;
   pointer-events: none;
+  appearance: textfield;
 }
 
+/* Remove spinner buttons from number input */
 .qtyInput::-webkit-outer-spin-button,
 .qtyInput::-webkit-inner-spin-button {
-  -webkit-appearance: none;
+  appearance: none;
   margin: 0;
 }
-
