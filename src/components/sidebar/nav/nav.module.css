@@ -16,11 +16,19 @@
 }
 
 .menuLink {
-  display: block;
   font-size: 14px;
-  line-height: 3.5rem;
-  color: #4B5563;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+  padding: 20px 0;
+  display: block;
+  line-height: 0.9;
+  color: #131212;
+  font-weight: normal;
+  -webkit-transition: all 500ms ease 0s;
+  transition: all 500ms ease 0s;
   text-decoration: none;
+  outline: 0 solid transparent;
 }
 
 .menuLink:hover {
@@ -28,13 +36,13 @@
 }
 
 .menuLink.active .activeIndicator{
-  width: 60px;
+  width: 40px;
 }
 
 .activeIndicator {
   position: absolute;
   left: -75px;
-  top: 50%;
+  top: 43%;
   height: 3px;
   background-color: #FBBF24;
   transition: width 0.2s ease-in-out;
@@ -42,6 +50,6 @@
 } 
 
 .menuItem:hover .activeIndicator {
-  width: 60px;
+  width: 40px;
   color: #FBBF24;
 }
