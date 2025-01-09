@@ -1,0 +1,39 @@
+.quantityControl {
+  display: flex;
+  align-items: center;
+}
+
+.qtyBtn {
+  width: 32px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f7fa;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.qtyIcon {
+  width: 10px;
+}
+
+.qtyInput {
+  text-align: center;
+  background-color: #f5f7fa;
+  height: 40px;
+  width: 20px;
+  border: none;
+  appearance: textfield;
+  color: #242424;
+  font-size: 0.875rem;
+}
+
+.qtyInput::-webkit-outer-spin-button,
+.qtyInput::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
