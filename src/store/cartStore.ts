@@ -11,7 +11,7 @@ interface CartItem {
     cartId: string;
     productId: number;
     quantity: number;
-    productDetails?: ProductDetails;
+    productDetails: ProductDetails;
 }
 
 interface CartState {
@@ -23,6 +23,10 @@ interface CartState {
     addToCart: (productId: number, quantity: number) => Promise<void>;
     fetchCart: (cartId: string) => Promise<void>;
     clearCart: (cartId: string) => Promise<void>;
+
+    removeItem: (productId: number) => Promise<void>;
+    updateQuantity: (productId: number, quantity: number) => Promise<void>;
+    getCartTotal: () => number;
 
 }
 
@@ -107,5 +111,42 @@ export const useCartStore = create<CartState>((set, get) => ({
             set({ error: "Failed to clear cart" });
             throw error;
         }
+    },
+    removeItem: async (productId: number) => {
+        const cartId = get().cartId;
+        if (!cartId) return;
+
+
+        try {
+            await axiosInstance.delete(`/carts/${cartId}/items/${productId}`);
+            await get().fetchCart(cartId);
+        } catch (error) {
+            set({ error: "Failed to remove item" });
+            throw error;
+        }
+    },
+
+    updateQuantity: async (productId: number, quantity: number) => {
+        const cartId = get().cartId;
+        if (!cartId) return;
+
+        try {
+            await axiosInstance.patch(`/carts/${cartId}/items/${productId}`, {
+                quantity
+            });
+            await get().fetchCart(cartId);
+        } catch (error) {
+            set({ error: "Failed to update quantity" });
+            throw error;
+        }
+    },
+
+    getCartTotal: () => {
+        return get().cartItems.reduce((total, item) => {
+            if (item.productDetails) {
+                return total + (item.productDetails.price * item.quantity);
+            }
+            return total;
+        }, 0);
     },
 }));
