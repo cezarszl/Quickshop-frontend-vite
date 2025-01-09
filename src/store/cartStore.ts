@@ -102,7 +102,6 @@ export const useCartStore = create<CartState>((set, get) => ({
     },
 
     clearCart: async (cartId: string) => {
-
         try {
             await axiosInstance.delete(`/carts/${cartId}/clear`);
             set({ cartItems: [] });
@@ -116,10 +115,17 @@ export const useCartStore = create<CartState>((set, get) => ({
         const cartId = get().cartId;
         if (!cartId) return;
 
-
         try {
+            const cartItems = get().cartItems;
+            const isLastItem = cartItems.length === 1;
+
             await axiosInstance.delete(`/carts/${cartId}/items/${productId}`);
-            await get().fetchCart(cartId);
+            if (isLastItem) {
+                localStorage.removeItem('anonymousCartId');
+                set({ cartId: null, cartItems: [] });
+            } else {
+                await get().fetchCart(cartId);
+            }
         } catch (error) {
             set({ error: "Failed to remove item" });
             throw error;
