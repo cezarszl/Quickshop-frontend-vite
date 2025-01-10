@@ -1,24 +1,53 @@
-.shopContainer {
-  display: flex;
-  width: 100%;
-  height: 100%; 
-}
-
+/* Sidebar filter */
 .filterSideBar {
   background-color: #f5f7fa;
-  width: 230px;
+  max-width: 14.375rem;
   flex: 1;
-  padding: 100px 40px;
+  padding: 6.25rem 2.5rem;
 }
 
+/* Main shop container */
+.shopContainer {
+  flex: 0 0 calc(95% - 34.375rem);
+  width: calc(95% - 34.375rem);
+  max-width: calc(95% - 34.375rem);
+  padding: 6.25rem 0;
+}
+
+/* Shop content wrapper */
 .shopContent {
-  flex: 5; 
-  padding: 5rem; 
-  background-color: #f9f9f9;
+  width: 100%;
+  padding-inline: 1rem;
+  margin-inline: auto;
 }
 
-.productsGrid {
-  display: grid;
-  grid-template-columns: repeat(2,1fr);
-  gap: 1rem;
+/* Products grid */
+.productsRow {
+  display: flex;
+  flex-wrap: wrap;
+  margin-inline: -15px;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 1200px) {
+  .filterSideBar {
+    max-width: 12rem;
+    padding: 4rem 1.5rem;
+  }
+
+  .shopContainer {
+    flex: 0 0 calc(95% - 24rem);
+    width: calc(95% - 24rem);
+    max-width: calc(95% - 24rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .filterSideBar,
+  .shopContainer {
+    flex: 0 0 100%;
+    max-width: 100%;
+    width: 100%;
+    padding: 2rem 1rem;
+  }
 }
