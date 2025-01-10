@@ -34,6 +34,7 @@ interface ProductState {
     selectedBrands: number[];
     sortOption: string;
     itemsPerPage: number;
+    totalCount: number;
     toogleBrand: (brandId: number) => void;
     setFilter: (key: keyof ProductFilter, value: any) => void;
     setSortOption: (option: string) => void,
@@ -56,6 +57,7 @@ export const useProductStore = create<ProductState>((set, get) => ({
     },
     sortOption: 'name-asc',
     itemsPerPage: 10,
+    totalCount: 0,
 
     toogleBrand: (brandId: number) => {
         const { selectedBrands } = get();
@@ -99,7 +101,8 @@ export const useProductStore = create<ProductState>((set, get) => ({
             params.append('limit', itemsPerPage.toString()); // Dodaj parametr `limit`
 
             const response = await axiosInstance.get(`/products`, { params });
-            set({ products: response.data });
+            const { products, totalCount } = response.data;
+            set({ products, totalCount });
         } catch (err) {
             console.error('Error fetching products', err);
         }
@@ -142,7 +145,8 @@ export const useProductStore = create<ProductState>((set, get) => ({
             params.append('limit', itemsPerPage.toString());
 
             const response = await axiosInstance.get(`/products`, { params });
-            set({ products: response.data });
+            const { products, totalCount } = response.data;
+            set({ products, totalCount });
         } catch (err) {
             console.error('Error fetching filtered products', err);
         }
