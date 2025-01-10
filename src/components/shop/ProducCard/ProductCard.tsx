@@ -20,24 +20,30 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     }
   };
   return (
-    <div className={styles.card}>
-      <img
-        src={`${baseUrl}${product.imageUrl}`}
-        alt={product.name}
-        className={styles.image}
-        width={444}
-      />
-      <span className={styles.line}></span>
-      <div className={styles.details}>
-        <div>
-          <p className={styles.price}>${product.price.toFixed(2)}</p>
-          <h6 className={styles.name}>{product.name}</h6>
+    <div className={styles.col12}>
+      <div className={styles.productCard}>
+        <div className={styles.productImage}>
+          <img
+            src={`${baseUrl}${product.imageUrl}`}
+            alt={product.name}
+            width={444}
+          />
         </div>
-        <div className={styles.basketWrapper}>
-          <div className={styles.basket} onClick={handleAddToCart}>
-            🛒
+
+        <div className={styles.productDescription}>
+          <div className={styles.productMetadata}>
+            <span className={styles.line}></span>
+            <div>
+              <p className={styles.price}>${product.price.toFixed(2)}</p>
+              <h6 className={styles.name}>{product.name}</h6>
+            </div>
           </div>
-          <span className={styles.tooltip}>Add to Cart</span>
+          <div className={styles.basketWrapper}>
+            <div className={styles.basket} onClick={handleAddToCart}>
+              🛒
+            </div>
+            <span className={styles.tooltip}>Add to Cart</span>
+          </div>
         </div>
       </div>
     </div>
