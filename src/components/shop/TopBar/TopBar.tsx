@@ -9,6 +9,7 @@ const TopBar: React.FC = () => {
     setItemsPerPage,
     fetchFilteredProducts,
     products,
+    totalCount,
   } = useProductStore();
 
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -28,9 +29,14 @@ const TopBar: React.FC = () => {
         <div className={styles.shopTopWrapper}>
           <div className={styles.totalProducts}>
             <p>
-              SHOWING {products.length > 0 ? "1" : "0"}-
-              {itemsPerPage < products.length ? itemsPerPage : products.length}{" "}
-              OF {products.length}
+              SHOWING{" "}
+              {products.length > 0
+                ? `1-${
+                    itemsPerPage < products.length
+                      ? itemsPerPage
+                      : products.length
+                  } OF ${totalCount}`
+                : "0"}
             </p>
           </div>
           <div className={styles.sortSection}>
