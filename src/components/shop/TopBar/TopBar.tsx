@@ -23,40 +23,39 @@ const TopBar: React.FC = () => {
   };
 
   return (
-    <div className={styles.topBar}>
-      <div className={styles.filterContainer}>
-        <div className={styles.sortSection}>
-          <label htmlFor="sort" className={styles.label}>
-            Sort by
-          </label>
-          <select
-            id="sort"
-            value={sortOption}
-            onChange={handleSortChange}
-            className={styles.select}
-          >
-            <option value="name-asc">Name</option>
-            <option value="price-asc">Price</option>
-            {/* <option value="default">Default</option>
-          <option value="price-desc">Price: High to Low</option>
-          <option value="name-desc">Name: Z to A</option> */}
-          </select>
-        </div>
-        <div className={styles.sortSection}>
-          <label htmlFor="itemsPerPage" className={styles.label}>
-            Show
-          </label>
-          <select
-            id="itemsPerPage"
-            value={itemsPerPage}
-            onChange={handleItemsPerPageChange}
-            className={styles.select}
-          >
-            <option value={5}>5</option>
-            <option value={10}>10</option>
-            <option value={20}>20</option>
-            <option value={50}>50</option>
-          </select>
+    <div className={styles.shopTopRow}>
+      <div className={styles.shopTopCol}>
+        <div className={styles.shopTopWrapper}>
+          <div className={styles.sortSection}>
+            <label htmlFor="sort" className={styles.label}>
+              Sort by
+            </label>
+            <select
+              id="sort"
+              value={sortOption}
+              onChange={handleSortChange}
+              className={styles.select}
+            >
+              <option value="name-asc">Name</option>
+              <option value="price-asc">Price</option>
+            </select>
+          </div>
+          <div className={styles.sortSection}>
+            <label htmlFor="itemsPerPage" className={styles.label}>
+              Show
+            </label>
+            <select
+              id="itemsPerPage"
+              value={itemsPerPage}
+              onChange={handleItemsPerPageChange}
+              className={styles.select}
+            >
+              <option value={5}>5</option>
+              <option value={10}>10</option>
+              <option value={20}>20</option>
+              <option value={50}>50</option>
+            </select>
+          </div>
         </div>
       </div>
     </div>
