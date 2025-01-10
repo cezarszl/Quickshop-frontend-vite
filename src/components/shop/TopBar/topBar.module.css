@@ -1,18 +1,32 @@
-.topBar {
-    margin: 0 5rem 4rem 0;
+.shopTopRow {
+  display: flex;
+  flex-wrap: wrap;
+  margin-inline: -15px;
 }
 
-.filterContainer {
+.shopTopCol {
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    max-width: 100%;
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.shopTopWrapper {
     display: flex;
-    justify-content: end;
-    gap: 1rem;
+    position: relative;
+    z-index: 100;
+    margin-bottom: 40px;
+    justify-content: flex-end;
+    gap: 1rem;  
 }
 
 .sortSection {
     display: flex;
-    gap: 1rem;
     background-color: #f5f7fa;
-
 }
 
 
@@ -32,6 +46,7 @@
     height: 40px;
     min-width: 80px;
     text-align: center;
+    outline: none;
 }
 .sortSection .select option{
     font-size: 12px;
