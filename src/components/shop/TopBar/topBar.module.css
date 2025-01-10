@@ -1,45 +1,44 @@
+/* Top row layout */
 .shopTopRow {
   display: flex;
   flex-wrap: wrap;
-  margin-inline: -15px;
+  margin-inline: -1rem;
 }
 
 .shopTopCol {
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    max-width: 100%;
-    position: relative;
-    width: 100%;
-    min-height: 1px;
-    padding-right: 15px;
-    padding-left: 15px;
+  flex: 0 0 100%;
+  max-width: 100%;
+  width: 100%;
+  padding-inline: 1rem;
 }
 
+/* Controls wrapper */
 .shopTopWrapper {
-    display: flex;
-    position: relative;
-    z-index: 100;
-    margin-bottom: 40px;
-    justify-content: flex-end;
-    gap: 1rem;  
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  position: relative;
+  z-index: 100;
+  margin-bottom: 2.5rem;
 }
 
+/* Sort controls */
 .sortSection {
-    display: flex;
-    background-color: #f5f7fa;
+  display: flex;
+  background-color: #f5f7fa;
 }
-
 
 .sortSection label {
-    margin-bottom: 0;
-    font-size: 14px;
-    height: 40px;
-    background-color: #f5f7fa;
-    line-height: 40px;
-    color: #959595;
-    padding-left: 15px;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  padding-left: 1rem;
+  margin: 0;
+  font-size: 0.875rem;
+  color: #959595;
+  background-color: #f5f7fa;
 }
 
+/* Select dropdown */
 .sortSection .select {
     background-color: #f5f7fa;
     border: none;
@@ -47,7 +46,16 @@
     min-width: 80px;
     text-align: center;
     outline: none;
+    font-size: 14px;
+    font-weight: 400;
+    line-height:40px;
+    cursor:pointer;
+    -webkit-tap-highlight-color: transparent;
+    font-family: inherit;
+    user-select: none;
+    white-space: nowrap;
 }
+
 .sortSection .select option{
     font-size: 12px;
     font-weight: 400;
@@ -55,4 +63,9 @@
     text-transform: uppercase;
     background-color: #f5f7fa;
     min-width: 60px; 
+}
+
+.sortSection {
+    display: flex;
+    background-color: #f5f7fa;
 }
