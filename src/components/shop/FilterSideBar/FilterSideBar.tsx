@@ -10,9 +10,14 @@ const FilterSidebar: React.FC = () => {
   const { categories, fetchCategories } = useCategoryStore();
   const { brands, fetchBrands } = useBrandStore();
   const { colors, fetchColors } = useColorStore();
-  const { filters, setFilter, fetchFilteredProducts, toogleBrand } =
-    useProductStore();
-  const [activeCategory, setActiveCategory] = useState(null);
+  const {
+    filters,
+    setFilter,
+    fetchFilteredProducts,
+    toogleBrand,
+    fetchProducts,
+  } = useProductStore();
+  const [activeCategory, setActiveCategory] = useState<number | null>(null);
 
   useEffect(() => {
     fetchCategories();
@@ -21,9 +26,14 @@ const FilterSidebar: React.FC = () => {
   }, [fetchCategories, fetchBrands]);
 
   const handleCategoryClick = (categoryId: number) => {
-    setFilter("categoryId", categoryId);
-    setActiveCategory(categoryId);
-    fetchFilteredProducts();
+    if (activeCategory === categoryId) {
+      setActiveCategory(null);
+      fetchProducts();
+    } else {
+      setActiveCategory(categoryId);
+      setFilter("categoryId", categoryId);
+      fetchFilteredProducts();
+    }
   };
 
   const handleBrandChange = (brandId: number) => {
