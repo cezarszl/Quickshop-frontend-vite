@@ -87,7 +87,7 @@ const FilterSidebar: React.FC = () => {
                 id={`brand-${brand.id}`}
                 value={brand.id}
                 className={styles.checkbox}
-                checked={filters.brandIds?.includes(brand.id)}
+                checked={(filters.brandIds || []).includes(brand.id)}
                 onChange={() => handleBrandChange(brand.id)}
               />
               <label
