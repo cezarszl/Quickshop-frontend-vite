@@ -94,13 +94,17 @@ export const useProductStore = create<ProductState>((set, get) => ({
 
     fetchProducts: async () => {
         try {
+            const { itemsPerPage } = get(); // Pobierz `itemsPerPage` z aktualnego stanu
+            const params = new URLSearchParams();
+            params.append('limit', itemsPerPage.toString()); // Dodaj parametr `limit`
 
-            const response = await axiosInstance.get(`/products`);
-            set({ products: response.data })
+            const response = await axiosInstance.get(`/products`, { params });
+            set({ products: response.data });
         } catch (err) {
             console.error('Error fetching products', err);
         }
     },
+
     fetchRandomProducts: async () => {
         try {
             const response = await axiosInstance.get(`/products/random-products`);
