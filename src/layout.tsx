@@ -5,13 +5,13 @@ import Footer from "./components/footer/Footer";
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <div className="layout">
+    <>
       <div className={styles.mainContainer}>
         <Sidebar />
-        <main className={styles.contentArea}>{children}</main>
+        {children}
       </div>
       <Footer />
-    </div>
+    </>
   );
 };
 
