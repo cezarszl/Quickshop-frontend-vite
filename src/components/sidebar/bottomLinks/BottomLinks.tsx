@@ -9,8 +9,14 @@ interface BottomLink {
 
 const BottomLinks: React.FC = () => {
   const { cartItems } = useCartStore();
+
+  const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
   const bottomLinks: BottomLink[] = [
-    { icon: "🛒", name: `CART (${cartItems.length})`, href: "/cart" },
+    {
+      icon: "🛒",
+      name: `CART (${totalQuantity})`,
+      href: "/cart",
+    },
     { icon: "⭐", name: "FAVOURITE", href: "#" },
     { icon: "🔍", name: "SEARCH", href: "#" },
   ];
