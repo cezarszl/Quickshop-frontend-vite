@@ -17,6 +17,7 @@ interface CartItem {
 interface CartState {
     cartId: string | null;
     cartItems: CartItem[];
+    totalQuantity: number;
     error: string | null;
 
     initializeCart: () => Promise<string>;
@@ -33,6 +34,7 @@ interface CartState {
 export const useCartStore = create<CartState>((set, get) => ({
     cartId: null,
     cartItems: [],
+    totalQuantity: 0,
     error: null,
 
     initializeCart: async () => {
@@ -94,7 +96,11 @@ export const useCartStore = create<CartState>((set, get) => ({
                 productDetails: productDetailsResponses[index].data,
             }));
 
-            set({ cartItems: itemsWithDetails, cartId });
+            const totalQuantity = itemsWithDetails.reduce(
+                (total, item) => total + item.quantity,
+                0
+            );
+            set({ cartItems: itemsWithDetails, cartId, totalQuantity });
         } catch (error) {
             set({ error: "Error fetching cart" });
             throw error;
@@ -104,7 +110,7 @@ export const useCartStore = create<CartState>((set, get) => ({
     clearCart: async (cartId: string) => {
         try {
             await axiosInstance.delete(`/carts/${cartId}/clear`);
-            set({ cartItems: [] });
+            set({ cartItems: [], totalQuantity: 0 });
             localStorage.removeItem("anonymousCartId");
         } catch (error) {
             set({ error: "Failed to clear cart" });
@@ -122,7 +128,7 @@ export const useCartStore = create<CartState>((set, get) => ({
             await axiosInstance.delete(`/carts/${cartId}/items/${productId}`);
             if (isLastItem) {
                 localStorage.removeItem('anonymousCartId');
-                set({ cartId: null, cartItems: [] });
+                set({ cartId: null, cartItems: [], totalQuantity: 0 });
             } else {
                 await get().fetchCart(cartId);
             }
