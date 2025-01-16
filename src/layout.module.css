@@ -1,5 +1,6 @@
 .mainContainer {
   display: flex;
   flex: 1;
+  padding-bottom: 5rem;
 }
 
