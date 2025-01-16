@@ -1,0 +1,67 @@
+.header {
+  width: 100%;
+  height: 5rem; 
+  background-color: #252525; 
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.navList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 2rem;
+    margin-right: 2rem;
+}
+
+.navItem {
+    display: flex;
+}
+.navLink {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.25rem;
+  position: relative;
+}
+.checkCircle, .greyCircle, .redCircle {
+    position: absolute; 
+    bottom: -2px;
+    right: -8px; 
+    color: white;
+    width: 18px; 
+    height: 18px; 
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px; 
+}
+.checkCircle {
+    background-color:green; 
+}
+.greyCircle {
+    background-color:grey; 
+}
+.redCircle {
+    background-color: red; 
+}
+
+.icon {
+    color: white;
+    font-size: 2rem;
+}
+.label {
+  font-size: 0.75rem; /* możesz dostosować rozmiar tekstu */
+  text-align: center;
+}
