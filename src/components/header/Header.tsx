@@ -52,7 +52,7 @@ const Header: React.FC = () => {
                   <div className={styles.redCircle}>{totalQuantity}</div>
                 )}
               </div>
-              <span className={styles.label}>Shopping Cart</span>
+              <span className={styles.label}>Cart</span>
             </a>
           </li>
         </ul>
