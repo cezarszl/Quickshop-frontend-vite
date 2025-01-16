@@ -8,9 +8,8 @@ interface BottomLink {
 }
 
 const BottomLinks: React.FC = () => {
-  const { cartItems } = useCartStore();
+  const { totalQuantity } = useCartStore();
 
-  const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
   const bottomLinks: BottomLink[] = [
     {
       icon: "🛒",
