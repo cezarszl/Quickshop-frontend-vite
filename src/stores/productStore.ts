@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import axiosInstance from '@/helpers/axiosInstance';
+import axiosInstance from '@/components/Sidebar/helpers/axiosInstance';
 
 export interface Product {
     id: number;

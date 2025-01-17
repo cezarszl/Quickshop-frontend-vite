@@ -1,6 +1,6 @@
 import { Product } from "@/stores/productStore";
 import styles from "./productCard.module.css";
-import axiosInstance from "@/helpers/axiosInstance";
+import axiosInstance from "@/components/Sidebar/helpers/axiosInstance";
 import { useCartStore } from "@/stores/cartStore";
 
 interface ProductCardProps {
