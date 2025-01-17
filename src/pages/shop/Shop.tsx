@@ -1,6 +1,6 @@
 import FilterSideBar from "@/components/shop/FilterSideBar/FilterSideBar";
 import styles from "./shop.module.css";
-import { useProductStore } from "@/store/productStore";
+import { useProductStore } from "@/stores/productStore";
 import ProductCard from "@/components/shop/ProducCard/ProductCard";
 import { useEffect } from "react";
 import TopBar from "@/components/shop/TopBar/TopBar";

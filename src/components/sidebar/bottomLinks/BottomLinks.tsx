@@ -1,5 +1,5 @@
 import styles from "./bottomLinks.module.css";
-import { useCartStore } from "@/store/cartStore";
+import { useCartStore } from "@/stores/cartStore";
 
 interface BottomLink {
   icon: string;

@@ -1,6 +1,6 @@
 import { FaMinus, FaPlus, FaTrash } from "react-icons/fa";
 import styles from "./quantityControl.module.css";
-import { useCartStore } from "@/store/cartStore";
+import { useCartStore } from "@/stores/cartStore";
 
 interface QuantityControlProps {
   productId: number;

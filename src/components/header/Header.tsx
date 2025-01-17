@@ -3,7 +3,7 @@ import styles from "./header.module.css";
 import { FaCheck, FaUser } from "react-icons/fa6";
 import { FaRegStar } from "react-icons/fa6";
 import { FaBagShopping } from "react-icons/fa6";
-import { useCartStore } from "@/store/cartStore";
+import { useCartStore } from "@/stores/cartStore";
 
 const Header: React.FC = () => {
   const { totalQuantity } = useCartStore();

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import styles from "./filterSideBar.module.css";
-import { useCategoryStore } from "@/store/categoryStore";
-import { useBrandStore } from "@/store/brandStore";
-import { useColorStore } from "@/store/colorStore";
+import { useCategoryStore } from "@/stores/categoryStore";
+import { useBrandStore } from "@/stores/brandStore";
+import { useColorStore } from "@/stores/colorStore";
 import PriceSlider from "../PriceSlider/PriceSlider";
-import { useProductStore } from "@/store/productStore";
+import { useProductStore } from "@/stores/productStore";
 
 const FilterSidebar: React.FC = () => {
   const { categories, fetchCategories } = useCategoryStore();

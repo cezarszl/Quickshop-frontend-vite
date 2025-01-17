@@ -1,4 +1,4 @@
-import { useProductStore } from "@/store/productStore";
+import { useProductStore } from "@/stores/productStore";
 import styles from "./topBar.module.css";
 
 const TopBar: React.FC = () => {

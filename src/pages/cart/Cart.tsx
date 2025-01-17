@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useCartStore } from "@/store/cartStore";
+import { useCartStore } from "@/stores/cartStore";
 import axiosInstance from "@/helpers/axiosInstance";
 import styles from "./cart.module.css";
 import QuantityControl from "@/components/cart/QuantityControl/QuantityControl";

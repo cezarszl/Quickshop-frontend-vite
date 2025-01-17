@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useProductStore } from "@/store/productStore";
+import { useProductStore } from "@/stores/productStore";
 import styles from "./categoriesGrid.module.css";
 import axiosInstance from "@/helpers/axiosInstance";
 
