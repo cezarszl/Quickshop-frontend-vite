@@ -1,8 +1,8 @@
 import React from "react";
-import Sidebar from "@/components/sidebar/SideBar";
+import Sidebar from "@/components/Sidebar/SideBar";
 import styles from "./layout.module.css";
-import Footer from "./components/footer/Footer";
-import Header from "./components/header/Header";
+import Footer from "./components/Footer/Footer";
+import Header from "./components/Header/Header";
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (

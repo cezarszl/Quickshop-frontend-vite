@@ -1,4 +1,4 @@
-import CategoriesGrid from "@/components/home/CategoriesGrid/CategoriesGrid";
+import CategoriesGrid from "@/components/Home/CategoriesGrid/CategoriesGrid";
 
 const Home: React.FC = () => {
   return <CategoriesGrid />;

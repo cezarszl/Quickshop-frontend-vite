@@ -1,9 +1,9 @@
-import FilterSideBar from "@/components/shop/FilterSideBar/FilterSideBar";
+import FilterSideBar from "@/components/Shop/FilterSideBar/FilterSideBar";
 import styles from "./shop.module.css";
 import { useProductStore } from "@/stores/productStore";
-import ProductCard from "@/components/shop/ProducCard/ProductCard";
+import ProductCard from "@/components/Shop/ProducCard/ProductCard";
 import { useEffect } from "react";
-import TopBar from "@/components/shop/TopBar/TopBar";
+import TopBar from "@/components/Shop/TopBar/TopBar";
 
 const Shop: React.FC = () => {
   const { products, fetchFilteredProducts } = useProductStore();
