@@ -18,6 +18,7 @@
 
 .navItem {
     display: flex;
+    position: relative;
 }
 .navLink {
   display: flex;

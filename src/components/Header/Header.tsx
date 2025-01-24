@@ -1,19 +1,41 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./header.module.css";
 import { FaCheck, FaUser } from "react-icons/fa6";
 import { FaRegStar } from "react-icons/fa6";
 import { FaBagShopping } from "react-icons/fa6";
 import { useCartStore } from "@/stores/cartStore";
+import AccountMenu from "./AccountMenu/AccountMenu";
 
 const Header: React.FC = () => {
   const { totalQuantity } = useCartStore();
+  const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
+
+  const profileIconRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      if (profileIconRef.current?.contains(e.target as Node)) {
+        setIsAccountMenuOpen((prev) => !prev);
+        return;
+      }
+
+      setIsAccountMenuOpen(false);
+    };
+
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+  }, []);
 
   return (
     <header className={styles.header}>
       <nav aria-label="Header navigation">
         <ul className={styles.navList}>
           <li className={styles.navItem}>
-            <a href="/profile" className={styles.navLink} aria-label="Profile">
+            <span
+              ref={profileIconRef}
+              className={styles.navLink}
+              aria-label="Profile"
+            >
               <div className={styles.iconWrapper}>
                 <FaUser className={styles.icon} />
                 <div className={styles.checkCircle}>
@@ -21,7 +43,8 @@ const Header: React.FC = () => {
                 </div>
               </div>
               <span className={styles.label}>Profile</span>
-            </a>
+            </span>
+            {isAccountMenuOpen && <AccountMenu />}
           </li>
 
           <li className={styles.navItem}>
