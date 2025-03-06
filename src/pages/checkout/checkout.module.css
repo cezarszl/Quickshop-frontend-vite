@@ -1,0 +1,124 @@
+.mainContent { 
+    margin: 8rem auto 0;
+    padding-top: 3.75rem;
+    padding-right: 6rem;
+    width: 100%;
+}
+
+.mainContentRow {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.mainContentCol4 {
+  flex: 0 0 33%;
+  padding: 0 1rem;
+}
+
+.mainContentCol8 {
+  flex: 0 0 67%;
+  padding: 0 1rem;
+}
+
+/* Checkout summary*/
+
+.checkoutSummary {
+  background-color: #f5f7fa;
+  padding: 2rem;
+}
+
+.checkoutSummary {
+  background-color: #f5f7fa;
+  padding: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.checkoutSummary h5 {
+  font-size: 1.125rem;
+  color: #242424;
+  line-height: 1.3;
+}
+
+.summaryTable {
+  margin-top: 2rem;
+  padding: 0;
+  list-style: none;
+}
+
+.summaryTable li {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  text-transform: capitalize;
+}
+.checkoutBtn {
+  margin-top: 4rem;
+}
+
+.checkoutBtn, .checkoutBtn a {
+  display: block;
+  width: 100%;
+  min-height: 3.5rem;
+  font-family: inherit;
+  padding: 0 1rem;
+  background-color: #fbb710;
+  color: #ffffff;
+  font-size: 1.125rem;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  transition: all 0.3s ease;
+  line-height: 55px;
+}
+
+
+
+.form {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.inputGroup {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.input {
+  width: 100%;
+  margin-bottom: 16px;
+  height: 60px;
+  border: none;
+  border-radius: 0;
+  background-color: #f5f7fa;
+  padding: 30px;
+  color: #6b6b6b;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.input:focus {
+  color: #495057;
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 .2rem rgba(0,123,255,.25)
+}
+
+.select {
+  font-family: inherit;
+  font-size: 14px; 
+  height: 60px;
+  width: 100%;
+  line-height: 60px;
+  color: #6b6b6b;
+  padding: 12px;
+  border-radius: 0;
+  border: none;
+  background-color: #f5f7fa;
+  margin-bottom: 16px;
+}
+
+
+
+
