@@ -20,7 +20,8 @@
 /* Cart layout */
 .cartTableArea {
   margin: 8rem auto 0;
-  padding: 3.75rem 0;
+  padding-top: 3.75rem;
+  padding-right: 6rem;
   width: 100%;
 }
 
