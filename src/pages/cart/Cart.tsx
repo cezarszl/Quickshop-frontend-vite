@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useCartStore } from "@/stores/cartStore";
-import axiosInstance from "@/components/Sidebar/helpers/axiosInstance";
+import axiosInstance from "@/helpers/axiosInstance";
 import styles from "./cart.module.css";
 import QuantityControl from "@/components/Cart/QuantityControl/QuantityControl";
 import { FaShoppingBag } from "react-icons/fa";

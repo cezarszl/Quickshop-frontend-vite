@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useProductStore } from "@/stores/productStore";
 import styles from "./categoriesGrid.module.css";
-import axiosInstance from "@/components/Sidebar/helpers/axiosInstance";
+import axiosInstance from "@/helpers/axiosInstance";
 
 const CategoriesGrid: React.FC = () => {
   const { randomProducts, fetchRandomProducts, minPrices, fetchMinPrices } =

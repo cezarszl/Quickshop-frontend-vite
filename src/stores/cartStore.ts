@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import axiosInstance from "@/components/Sidebar/helpers/axiosInstance";
+import axiosInstance from "@/helpers/axiosInstance";
 
 interface ProductDetails {
     name: string;

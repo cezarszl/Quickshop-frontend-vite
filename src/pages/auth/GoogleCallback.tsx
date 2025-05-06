@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLoginStore } from "@/stores/loginStore";
-import axiosInstance from "@/components/Sidebar/helpers/axiosInstance"; // lub axios
+import axiosInstance from "@/helpers/axiosInstance";
 
 const GoogleCallback: React.FC = () => {
   const navigate = useNavigate();

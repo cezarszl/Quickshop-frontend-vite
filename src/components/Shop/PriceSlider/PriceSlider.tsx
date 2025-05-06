@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { useProductStore } from "@/stores/productStore";
-import debounce from "@/components/Sidebar/helpers/debounce";
+import debounce from "@/helpers/debounce";
 import styles from "./priceSlider.module.css";
 
 const PriceSlider = () => {
