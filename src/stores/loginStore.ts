@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 import axiosInstance from "@/components/Sidebar/helpers/axiosInstance";
 
 interface User {
@@ -10,7 +11,7 @@ interface User {
 
 interface LoginState {
     token: string | null;
-    user: User | null
+    user: User | null;
     isLoggedIn: boolean;
     error: string | null;
 
@@ -19,42 +20,49 @@ interface LoginState {
     logout: () => void;
 }
 
+export const useLoginStore = create<LoginState>()(
+    persist(
+        (set) => ({
+            token: null,
+            user: null,
+            isLoggedIn: false,
+            error: null,
 
+            login: async (email: string, password: string) => {
+                try {
+                    const response = await axiosInstance.post("/auth/login", { email, password });
+                    const { token, user } = response.data;
 
-export const useLoginStore = create<LoginState>((set) => ({
-    token: null,
-    user: null,
-    isLoggedIn: false,
-    error: null,
+                    axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+                    set({ token, user, isLoggedIn: true, error: null });
+                } catch (error) {
+                    set({ error: "Failed to log in" });
+                    throw error;
+                }
+            },
 
-    login: async (email: string, password: string) => {
-        try {
-            const response = await axiosInstance.post('/auth/login', { email, password });
-            const { token, user } = response.data
+            register: async (name: string, email: string, password: string) => {
+                try {
+                    await axiosInstance.post("/auth/register", { name, email, password });
+                } catch (error) {
+                    set({ error: "Failed to register" });
+                    throw error;
+                }
+            },
 
-            localStorage.setItem("authToken", token);
-            set({ token, user, isLoggedIn: true, error: null });
-        } catch (error) {
-            set({ error: 'Failed to log in' });
-            throw error;
-
+            logout: () => {
+                localStorage.removeItem("auth-storage"); // <- czyści dane z persist
+                set({ token: null, user: null, isLoggedIn: false, error: null });
+                delete axiosInstance.defaults.headers.common["Authorization"];
+            },
+        }),
+        {
+            name: "auth-storage", // klucz w localStorage
+            partialize: (state) => ({
+                token: state.token,
+                user: state.user,
+                isLoggedIn: state.isLoggedIn,
+            }),
         }
-    },
-
-    register: async (name: string, email: string, password: string) => {
-        try {
-            await axiosInstance.post('/auth/register', { name, email, password });
-        } catch (error) {
-            set({ error: "Failed to register" });
-            throw error;
-        }
-    },
-
-    logout: () => {
-        localStorage.removeItem("authToken");
-        set({ token: null, user: null, isLoggedIn: false });
-    },
-}));
-
-
-
+    )
+);
