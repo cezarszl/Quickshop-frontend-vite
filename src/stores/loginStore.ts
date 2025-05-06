@@ -17,6 +17,7 @@ interface LoginState {
 
     login: (email: string, password: string) => Promise<void>;
     register: (name: string, email: string, password: string) => Promise<void>;
+    loginWithGoogle: () => void;
     logout: () => void;
 }
 
@@ -28,7 +29,7 @@ export const useLoginStore = create<LoginState>()(
             isLoggedIn: false,
             error: null,
 
-            login: async (email: string, password: string) => {
+            login: async (email, password) => {
                 try {
                     const response = await axiosInstance.post("/auth/login", { email, password });
                     const { token, user } = response.data;
@@ -41,7 +42,11 @@ export const useLoginStore = create<LoginState>()(
                 }
             },
 
-            register: async (name: string, email: string, password: string) => {
+            loginWithGoogle: () => {
+                window.location.href = `${import.meta.env.VITE_API_BASE_URL}/auth/google`;
+            },
+
+            register: async (name, email, password) => {
                 try {
                     await axiosInstance.post("/auth/register", { name, email, password });
                 } catch (error) {
@@ -57,7 +62,7 @@ export const useLoginStore = create<LoginState>()(
             },
         }),
         {
-            name: "auth-storage", // klucz w localStorage
+            name: "auth-storage",
             partialize: (state) => ({
                 token: state.token,
                 user: state.user,

@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useLoginStore } from "@/stores/loginStore";
 import { useNavigate } from "react-router-dom";
 import styles from "./login.module.css";
+import { FcGoogle } from "react-icons/fc";
 
 const loginSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -18,6 +19,7 @@ const LoginPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const login = useLoginStore((state) => state.login);
+  const loginWithGoogle = useLoginStore((state) => state.loginWithGoogle);
   const error = useLoginStore((state) => state.error);
   const isLoggedIn = useLoginStore((state) => state.isLoggedIn);
   const navigate = useNavigate();
@@ -87,6 +89,10 @@ const LoginPage: React.FC = () => {
           disabled={isLoading}
         >
           {isLoading ? "Logging in..." : "Log in"}
+        </button>
+        <button onClick={loginWithGoogle} className={styles.googleButton}>
+          <FcGoogle className={styles.googleIcon} />
+          Continue with Google
         </button>
       </form>
     </div>
