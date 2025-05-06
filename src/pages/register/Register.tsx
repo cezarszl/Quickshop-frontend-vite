@@ -7,6 +7,7 @@ import { useLoginStore } from "@/stores/loginStore";
 import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc"; // ikona Google
 import styles from "./register.module.css";
+import axios from "axios";
 
 const registerSchema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -25,6 +26,7 @@ const Register: React.FC = () => {
 
   const {
     register,
+    setError,
     handleSubmit,
     formState: { errors },
   } = useForm<RegisterFormData>({
@@ -41,8 +43,15 @@ const Register: React.FC = () => {
     try {
       await registerUser(data.name, data.email, data.password);
       navigate("/login");
-    } catch (e) {
-      console.error("Registration failed:", e);
+    } catch (error: any) {
+      if (axios.isAxiosError(error) && error.response?.status === 409) {
+        setError("email", {
+          type: "manual",
+          message: "Email is already registered",
+        });
+      } else {
+        console.error("Registration failed:", error);
+      }
     } finally {
       setIsLoading(false);
     }
@@ -66,6 +75,7 @@ const Register: React.FC = () => {
           type="email"
           placeholder="Email"
           className={styles.input}
+          autoComplete="off"
           {...register("email")}
         />
         {errors.email && (
@@ -75,6 +85,7 @@ const Register: React.FC = () => {
         <input
           type="password"
           placeholder="Password"
+          autoComplete="off"
           className={styles.input}
           {...register("password")}
         />
