@@ -1,8 +1,10 @@
 // Login.tsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useLoginStore } from "@/stores/loginStore";
+import { useNavigate } from "react-router-dom";
 import styles from "./login.module.css";
 
 const loginSchema = z.object({
@@ -14,6 +16,11 @@ type LoginFormData = z.infer<typeof loginSchema>;
 
 const LoginPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
+
+  const login = useLoginStore((state) => state.login);
+  const error = useLoginStore((state) => state.error);
+  const isLoggedIn = useLoginStore((state) => state.isLoggedIn);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -30,16 +37,19 @@ const LoginPage: React.FC = () => {
   const onSubmit = async (data: LoginFormData) => {
     setIsLoading(true);
     try {
-      console.log("Login data:", data);
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      alert("Successfully logged in!");
-    } catch (error) {
+      await login(data.email, data.password);
+      navigate("/");
       console.error("Login error:", error);
-      alert("An error occurred during login");
     } finally {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/");
+    }
+  }, [isLoggedIn, navigate]);
 
   return (
     <div className={styles.loginContainer}>
@@ -68,6 +78,8 @@ const LoginPage: React.FC = () => {
             <p className={styles.errorMessage}>{errors.password.message}</p>
           )}
         </div>
+
+        {error && <p className={styles.errorMessage}>{error}</p>}
 
         <button
           type="submit"
