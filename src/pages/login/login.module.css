@@ -13,7 +13,7 @@
   margin: 2rem 0;
 }
 
-.form {
+.form, .Google {
   width: 100%;
   max-width: 400px;
   margin: 0 auto;

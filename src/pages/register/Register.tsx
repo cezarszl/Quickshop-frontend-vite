@@ -102,11 +102,13 @@ const Register: React.FC = () => {
         >
           {isLoading ? "Registering..." : "Register"}
         </button>
+      </form>
+      <div className={styles.Google}>
         <button onClick={loginWithGoogle} className={styles.googleButton}>
           <FcGoogle className={styles.googleIcon} />
           Continue with Google
         </button>
-      </form>
+      </div>
     </div>
   );
 };

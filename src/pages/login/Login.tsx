@@ -90,11 +90,13 @@ const LoginPage: React.FC = () => {
         >
           {isLoading ? "Logging in..." : "Log in"}
         </button>
+      </form>
+      <div className={styles.Google}>
         <button onClick={loginWithGoogle} className={styles.googleButton}>
           <FcGoogle className={styles.googleIcon} />
           Continue with Google
         </button>
-      </form>
+      </div>
     </div>
   );
 };
