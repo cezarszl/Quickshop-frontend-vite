@@ -9,22 +9,23 @@ const GoogleCallback: React.FC = () => {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const token = params.get("token");
+    const refreshToken = params.get("refreshToken");
     const userString = params.get("user");
 
-    if (token && userString) {
+    if (token && refreshToken && userString) {
       try {
         const user = JSON.parse(decodeURIComponent(userString));
-
+        axiosInstance.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${token}`;
+        localStorage.setItem("refreshToken", refreshToken);
         useLoginStore.setState({
           token,
+          refreshToken,
           user,
           isLoggedIn: true,
           error: null,
         });
-
-        axiosInstance.defaults.headers.common[
-          "Authorization"
-        ] = `Bearer ${token}`;
 
         navigate("/");
       } catch (error) {
