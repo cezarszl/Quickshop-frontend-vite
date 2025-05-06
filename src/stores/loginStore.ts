@@ -51,7 +51,7 @@ export const useLoginStore = create<LoginState>()(
             },
 
             logout: () => {
-                localStorage.removeItem("auth-storage"); // <- czyści dane z persist
+                localStorage.removeItem("auth-storage");
                 set({ token: null, user: null, isLoggedIn: false, error: null });
                 delete axiosInstance.defaults.headers.common["Authorization"];
             },
