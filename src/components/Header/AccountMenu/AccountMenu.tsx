@@ -21,7 +21,9 @@ const AccountMenu: React.FC<AccountMenuProps> = () => {
         <li>My orders</li>
       </ul>
       {isLoggedIn ? (
-        <button onClick={handleLogout}>LOGOUT</button>
+        <button onClick={handleLogout} className={styles.loginBtn}>
+          LOGOUT
+        </button>
       ) : (
         <a href="/login" className={styles.loginBtn}>
           LOGIN
