@@ -11,6 +11,7 @@ interface User {
 
 interface LoginState {
     token: string | null;
+    refreshToken?: string | null;
     user: User | null;
     isLoggedIn: boolean;
     error: string | null;
@@ -32,10 +33,16 @@ export const useLoginStore = create<LoginState>()(
             login: async (email, password) => {
                 try {
                     const response = await axiosInstance.post("/auth/login", { email, password });
-                    const { token, user } = response.data;
+                    const { accessToken, refreshToken, user } = response.data;
 
-                    axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-                    set({ token, user, isLoggedIn: true, error: null });
+                    axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+                    localStorage.setItem("refreshToken", refreshToken);
+                    set({
+                        token: accessToken,
+                        refreshToken,
+                        user, isLoggedIn: true,
+                        error: null
+                    });
                 } catch (error) {
                     set({ error: "Failed to log in" });
                     throw error;
@@ -56,6 +63,7 @@ export const useLoginStore = create<LoginState>()(
             },
 
             logout: () => {
+                localStorage.removeItem("refreshToken");
                 localStorage.removeItem("auth-storage");
                 set({ token: null, user: null, isLoggedIn: false, error: null });
                 delete axiosInstance.defaults.headers.common["Authorization"];
