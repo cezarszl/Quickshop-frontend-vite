@@ -5,11 +5,12 @@ import { FaRegStar } from "react-icons/fa6";
 import { FaBagShopping } from "react-icons/fa6";
 import { useCartStore } from "@/stores/cartStore";
 import AccountMenu from "./AccountMenu/AccountMenu";
+import { useLoginStore } from "@/stores/loginStore";
 
 const Header: React.FC = () => {
   const { totalQuantity } = useCartStore();
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
-
+  const isLoggedIn = useLoginStore((state) => state.isLoggedIn);
   const profileIconRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -38,9 +39,11 @@ const Header: React.FC = () => {
             >
               <div className={styles.iconWrapper}>
                 <FaUser className={styles.icon} />
-                <div className={styles.checkCircle}>
-                  <FaCheck />
-                </div>
+                {isLoggedIn && (
+                  <div className={styles.checkCircle}>
+                    <FaCheck />
+                  </div>
+                )}
               </div>
               <span className={styles.label}>Profile</span>
             </span>
