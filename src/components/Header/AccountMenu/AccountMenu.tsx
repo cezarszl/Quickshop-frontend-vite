@@ -25,13 +25,15 @@ const AccountMenu: React.FC<AccountMenuProps> = () => {
           LOGOUT
         </button>
       ) : (
-        <a href="/login" className={styles.loginBtn}>
-          LOGIN
-        </a>
+        <>
+          <a href="/login" className={styles.loginBtn}>
+            LOGIN
+          </a>
+          <a href="/register" className={styles.registerLink}>
+            New here? Register now
+          </a>
+        </>
       )}
-      <a href="/register" className={styles.registerLink}>
-        New here? Register now
-      </a>
     </div>
   );
 };
