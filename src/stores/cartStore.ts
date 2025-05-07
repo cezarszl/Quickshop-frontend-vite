@@ -196,37 +196,36 @@ export const useCartStore = create<CartState>()(
             syncAfterLogin: async (userId: number) => {
                 const anonymousCartId = get().cartId ?? localStorage.getItem("anonymousCartId");
 
-                if (anonymousCartId && typeof anonymousCartId === "string") {
-                    try {
+                try {
+                    if (anonymousCartId && typeof anonymousCartId === "string") {
                         await axiosInstance.put("/carts/merge", {
                             userId,
                             anonymousCartId,
                         });
 
                         localStorage.removeItem("anonymousCartId");
-                    } catch (error) {
-                        console.error("Failed to merge carts:", error);
-                        set({ error: "Failed to merge carts" });
-                        return;
+                    } else {
+                        // 🔥 Jeśli nie było anonimowego koszyka — utwórz nowy koszyk dla usera
+                        const { data: newCart } = await axiosInstance.post("/carts", {
+                            userId, // <–– dodaj do body, backend i tak może nadpisać JWT-em
+                        });
+                        set({ cartId: newCart.id });
                     }
-                }
 
-                try {
+                    // 🧠 Pobierz userowy koszyk niezależnie od merge'a lub nowego
                     const { data: userCartItems } = await axiosInstance.get(`/users/${userId}/cart`);
                     const userCartId = userCartItems[0]?.cartId;
 
-                    if (!userCartId) {
-                        set({ error: "No cartId found for user" });
-                        return;
+                    if (userCartId) {
+                        await get().fetchCart(userCartId);
+                        set({ cartId: userCartId });
                     }
-
-                    await get().fetchCart(userCartId);
-                    set({ cartId: userCartId });
                 } catch (error) {
-                    console.error("Failed to load user cart after merge", error);
-                    set({ error: "Failed to load user cart" });
+                    console.error("syncAfterLogin failed", error);
+                    set({ error: "Failed to sync cart after login" });
                 }
             },
+
 
             resetCart: () => {
                 set({
