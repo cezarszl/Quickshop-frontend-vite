@@ -202,14 +202,32 @@ export const useCartStore = create<CartState>()(
                             userId,
                             anonymousCartId,
                         });
+
                         localStorage.removeItem("anonymousCartId");
                     } catch (error) {
                         console.error("Failed to merge carts:", error);
+                        set({ error: "Failed to merge carts" });
+                        return;
                     }
                 }
 
-                await get().loadUserCart(userId);
+                try {
+                    const { data: userCartItems } = await axiosInstance.get(`/users/${userId}/cart`);
+                    const userCartId = userCartItems[0]?.cartId;
+
+                    if (!userCartId) {
+                        set({ error: "No cartId found for user" });
+                        return;
+                    }
+
+                    await get().fetchCart(userCartId);
+                    set({ cartId: userCartId });
+                } catch (error) {
+                    console.error("Failed to load user cart after merge", error);
+                    set({ error: "Failed to load user cart" });
+                }
             },
+
             resetCart: () => {
                 set({
                     cartId: null,

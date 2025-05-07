@@ -7,8 +7,7 @@ import { FaShoppingBag } from "react-icons/fa";
 
 const baseUrl = axiosInstance.defaults.baseURL;
 const CartPage: React.FC = () => {
-  const { cartItems, fetchCart, getCartTotal } = useCartStore();
-  const cartId = localStorage.getItem("anonymousCartId");
+  const { cartItems, fetchCart, getCartTotal, cartId } = useCartStore();
 
   useEffect(() => {
     if (cartId) {
