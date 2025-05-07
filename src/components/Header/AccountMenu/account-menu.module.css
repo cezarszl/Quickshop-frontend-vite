@@ -47,6 +47,10 @@
   padding: 10px;
   cursor: pointer;
 }
+.accountMenu a {
+  text-decoration: none;
+  color: inherit;
+}
 
 .accountMenu ul li:hover {
   background-color: lightgray;

@@ -6,6 +6,7 @@ import Checkout from "@/pages/checkout/Checkout";
 import Login from "@/pages/login/Login";
 import Register from "@/pages/register/Register";
 import GoogleCallback from "@/pages/auth/GoogleCallback";
+import Profile from "@/pages/profile/Profile";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -17,6 +18,7 @@ const AppRoutes: React.FC = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/auth/google/callback" element={<GoogleCallback />} />
+      <Route path="/profile" element={<Profile />} />
     </Routes>
   );
 };

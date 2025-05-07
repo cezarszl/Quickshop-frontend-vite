@@ -1,6 +1,6 @@
 import { useLoginStore } from "@/stores/loginStore";
 import styles from "./account-menu.module.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 interface AccountMenuProps {}
 
@@ -17,8 +17,12 @@ const AccountMenu: React.FC<AccountMenuProps> = () => {
   return (
     <div className={styles.accountMenu}>
       <ul>
-        <li>My profile</li>
-        <li>My orders</li>
+        <li>
+          <Link to="/profile">My profile</Link>
+        </li>
+        <li>
+          <Link to="/orders">My orders</Link>
+        </li>
       </ul>
       {isLoggedIn ? (
         <button onClick={handleLogout} className={styles.loginBtn}>

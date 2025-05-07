@@ -1,0 +1,20 @@
+.profileContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  text-align: center;
+  
+}
+
+.profileField {
+    background-color: #f5f7fa;
+  font-size: 1.1rem;
+    padding: 3rem;
+
+}
+.profileContainer h2 {
+  margin-bottom: 5rem;
+}
