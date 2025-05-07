@@ -52,5 +52,14 @@ axiosInstance.interceptors.response.use(
         return Promise.reject(error);
     }
 );
+axiosInstance.interceptors.request.use((config) => {
+    const token = localStorage.getItem("token"); // albo z loginStore, zależnie od implementacji
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+});
+
+
 
 export default axiosInstance;
