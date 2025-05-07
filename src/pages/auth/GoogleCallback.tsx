@@ -2,9 +2,11 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLoginStore } from "@/stores/loginStore";
 import axiosInstance from "@/helpers/axiosInstance";
+import { useCartStore } from "@/stores/cartStore";
 
 const GoogleCallback: React.FC = () => {
   const navigate = useNavigate();
+  const syncAfterLogin = useCartStore((state) => state.syncAfterLogin);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -27,7 +29,11 @@ const GoogleCallback: React.FC = () => {
           error: null,
         });
 
-        navigate("/");
+        if (user?.id) {
+          syncAfterLogin(user.id).finally(() => navigate("/"));
+        } else {
+          navigate("/");
+        }
       } catch (error) {
         console.error("Failed to parse Google callback data", error);
         navigate("/login");
@@ -36,7 +42,7 @@ const GoogleCallback: React.FC = () => {
       console.error("Missing token or user in callback URL");
       navigate("/login");
     }
-  }, [navigate]);
+  }, [navigate, syncAfterLogin]);
 
   return <p>Logging in with Google...</p>;
 };
