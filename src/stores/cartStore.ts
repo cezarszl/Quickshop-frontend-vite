@@ -28,6 +28,7 @@ interface CartState {
     removeItem: (productId: number) => Promise<void>;
     updateQuantity: (productId: number, quantity: number) => Promise<void>;
     getCartTotal: () => number;
+    loadUserCart: (userId: number) => Promise<void>;
     syncAfterLogin: (userId: number) => Promise<void>;
     resetCart: () => void;
 
@@ -162,6 +163,35 @@ export const useCartStore = create<CartState>()(
                     }
                     return total;
                 }, 0);
+            },
+            loadUserCart: async (userId: number) => {
+                try {
+                    const { data: cartItemsRaw } = await axiosInstance.get(`/users/${userId}/cart`);
+
+                    const productDetailsPromises = cartItemsRaw.map((item: any) =>
+                        axiosInstance.get(`/products/${item.productId}`)
+                    );
+                    const productDetailsResponses = await Promise.all(productDetailsPromises);
+
+                    const itemsWithDetails = cartItemsRaw.map((item: any, i: number) => ({
+                        ...item,
+                        productDetails: productDetailsResponses[i].data,
+                    }));
+
+                    const totalQuantity = itemsWithDetails.reduce(
+                        (total: number, item: CartItem) => total + item.quantity,
+                        0
+                    );
+
+                    set({
+                        cartItems: itemsWithDetails,
+                        totalQuantity,
+                        cartId: null,
+                    });
+                } catch (error) {
+                    set({ error: "Failed to load user cart" });
+                    throw error;
+                }
             },
             syncAfterLogin: async (userId: number) => {
                 const anonymousCartId = get().cartId ?? localStorage.getItem("anonymousCartId");
