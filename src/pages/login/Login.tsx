@@ -7,6 +7,7 @@ import { useLoginStore } from "@/stores/loginStore";
 import { useNavigate } from "react-router-dom";
 import styles from "./login.module.css";
 import { FcGoogle } from "react-icons/fc";
+import { useCartStore } from "@/stores/cartStore";
 
 const loginSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -22,6 +23,7 @@ const LoginPage: React.FC = () => {
   const loginWithGoogle = useLoginStore((state) => state.loginWithGoogle);
   const error = useLoginStore((state) => state.error);
   const isLoggedIn = useLoginStore((state) => state.isLoggedIn);
+  const syncAfterLogin = useCartStore((state) => state.syncAfterLogin);
   const navigate = useNavigate();
 
   const {
@@ -40,8 +42,15 @@ const LoginPage: React.FC = () => {
     setIsLoading(true);
     try {
       await login(data.email, data.password);
+
+      const user = useLoginStore.getState().user;
+      if (user?.id) {
+        await syncAfterLogin(user.id);
+      }
+
       navigate("/");
-      console.error("Login error:", error);
+    } catch (err) {
+      console.error("Login error:", err);
     } finally {
       setIsLoading(false);
     }

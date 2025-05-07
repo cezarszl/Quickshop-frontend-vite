@@ -28,6 +28,9 @@ interface CartState {
     removeItem: (productId: number) => Promise<void>;
     updateQuantity: (productId: number, quantity: number) => Promise<void>;
     getCartTotal: () => number;
+    syncAfterLogin: (userId: number) => Promise<void>;
+    resetCart: () => void;
+
 }
 
 export const useCartStore = create<CartState>()(
@@ -160,6 +163,32 @@ export const useCartStore = create<CartState>()(
                     return total;
                 }, 0);
             },
+            syncAfterLogin: async (userId: number) => {
+                const anonymousCartId = get().cartId ?? localStorage.getItem("anonymousCartId");
+
+                if (anonymousCartId && typeof anonymousCartId === "string") {
+                    try {
+                        await axiosInstance.put("/carts/merge", {
+                            userId,
+                            anonymousCartId,
+                        });
+                        localStorage.removeItem("anonymousCartId");
+                    } catch (error) {
+                        console.error("Failed to merge carts:", error);
+                    }
+                }
+
+                await get().loadUserCart(userId);
+            },
+            resetCart: () => {
+                set({
+                    cartId: null,
+                    cartItems: [],
+                    totalQuantity: 0,
+                    error: null,
+                });
+            },
+
         }),
         {
             name: "cart-storage",

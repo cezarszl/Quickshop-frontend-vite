@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import axiosInstance from "@/helpers/axiosInstance";
+import { useCartStore } from "./cartStore";
 
 interface User {
     id: number;
@@ -65,8 +66,10 @@ export const useLoginStore = create<LoginState>()(
             logout: () => {
                 localStorage.removeItem("refreshToken");
                 localStorage.removeItem("auth-storage");
+                localStorage.removeItem("anonymousCartId");
                 set({ token: null, user: null, isLoggedIn: false, error: null });
                 delete axiosInstance.defaults.headers.common["Authorization"];
+                useCartStore.getState().resetCart();
             },
         }),
         {
