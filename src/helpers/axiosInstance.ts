@@ -53,12 +53,13 @@ axiosInstance.interceptors.response.use(
     }
 );
 axiosInstance.interceptors.request.use((config) => {
-    const token = localStorage.getItem("token");
+    const token = useLoginStore.getState().token;
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
 });
+
 
 
 
