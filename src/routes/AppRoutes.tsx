@@ -7,6 +7,7 @@ import Login from "@/pages/login/Login";
 import Register from "@/pages/register/Register";
 import GoogleCallback from "@/pages/auth/GoogleCallback";
 import Profile from "@/pages/profile/Profile";
+import Favorites from "@/pages/favorites/Favorites";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -19,6 +20,7 @@ const AppRoutes: React.FC = () => {
       <Route path="/register" element={<Register />} />
       <Route path="/auth/google/callback" element={<GoogleCallback />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/favorites" element={<Favorites />} />
     </Routes>
   );
 };
