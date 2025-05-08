@@ -33,7 +33,7 @@
 /* Product columns */
 
 .col8 {
-  flex: 0 0 67%;
+  flex: 0 0 100%;
   padding: 0 1rem;
 }
 
@@ -78,7 +78,7 @@
 
 /* Button styles */
 .removeBtn {
-  margin-top: 4rem;
+  font-size: 1.5rem;
 }
 
 

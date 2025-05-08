@@ -3,15 +3,25 @@ import axiosInstance from "@/helpers/axiosInstance";
 import styles from "./favorites.module.css";
 import { FaStar, FaTrash } from "react-icons/fa";
 import { useFavoriteStore } from "@/stores/favoriteStore";
+import { useLoginStore } from "@/stores/loginStore";
 
 const baseUrl = axiosInstance.defaults.baseURL;
 
 const Favorites: React.FC = () => {
   const { favorites, fetchFavorites, removeFavorite } = useFavoriteStore();
+  const user = useLoginStore((state) => state.user);
 
   useEffect(() => {
     fetchFavorites();
   }, [fetchFavorites]);
+
+  if (!user) {
+    return (
+      <div className={styles.emptyFavorites}>
+        <h2>You are not logged in.</h2>
+      </div>
+    );
+  }
 
   if (favorites.length === 0) {
     return (
