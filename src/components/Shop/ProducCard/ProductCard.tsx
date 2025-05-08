@@ -67,9 +67,18 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           </div>
           <div className={styles.actionsWrapper}>
             <div className={styles.favWrapper}>
-              <span className={styles.favorite} onClick={toggleFavorite}>
-                {isFavorite ? "★" : "☆"}
-              </span>
+              {isLoggedIn ? (
+                <span className={styles.favorite} onClick={toggleFavorite}>
+                  {isFavorite ? "★" : "☆"}
+                </span>
+              ) : (
+                <span
+                  className={styles.favorite}
+                  title="Log in to add favorite"
+                >
+                  ☆
+                </span>
+              )}
               <span className={styles.favTooltip}>Add to Favorites</span>
             </div>
             <div className={styles.basketWrapper}>
