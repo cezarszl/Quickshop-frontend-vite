@@ -195,7 +195,7 @@ export const useCartStore = create<CartState>()(
             },
             syncAfterLogin: async (userId: number) => {
                 const anonymousCartId = get().cartId ?? localStorage.getItem("anonymousCartId");
-
+                console.log('Został wywolany syncAfterLogin')
                 try {
                     if (anonymousCartId && typeof anonymousCartId === "string") {
                         await axiosInstance.put("/carts/merge", {
@@ -205,7 +205,6 @@ export const useCartStore = create<CartState>()(
 
                         localStorage.removeItem("anonymousCartId");
                     } else {
-                        // 🔥 Jeśli nie było anonimowego koszyka — utwórz nowy koszyk dla usera
                         const { data: newCart } = await axiosInstance.post("/carts", {
                             userId, // <–– dodaj do body, backend i tak może nadpisać JWT-em
                         });
