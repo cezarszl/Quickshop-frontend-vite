@@ -34,7 +34,6 @@ const GoogleCallback: React.FC = () => {
         });
 
         if (user?.id) {
-          console.log("User from Google:", user);
           syncAfterLogin(user.id).finally(() => navigate("/"));
         } else {
           navigate("/");
