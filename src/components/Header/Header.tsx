@@ -6,9 +6,11 @@ import { FaBagShopping } from "react-icons/fa6";
 import { useCartStore } from "@/stores/cartStore";
 import AccountMenu from "./AccountMenu/AccountMenu";
 import { useLoginStore } from "@/stores/loginStore";
+import { useFavoriteStore } from "@/stores/favoriteStore";
 
 const Header: React.FC = () => {
   const { totalQuantity } = useCartStore();
+  const { totalFavQuantity } = useFavoriteStore();
   const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
   const isLoggedIn = useLoginStore((state) => state.isLoggedIn);
   const profileIconRef = useRef<HTMLDivElement>(null);
@@ -58,7 +60,9 @@ const Header: React.FC = () => {
             >
               <div className={styles.iconWrapper}>
                 <FaRegStar className={styles.icon} />
-                <div className={styles.greyCircle}>5</div>
+                {totalFavQuantity !== 0 && (
+                  <div className={styles.greyCircle}>{totalFavQuantity}</div>
+                )}
               </div>
               <span className={styles.label}>Favorites</span>
             </a>
@@ -72,9 +76,7 @@ const Header: React.FC = () => {
             >
               <div className={styles.iconWrapper}>
                 <FaBagShopping className={styles.icon} />
-                {totalQuantity === 0 ? (
-                  ""
-                ) : (
+                {totalQuantity !== 0 && (
                   <div className={styles.redCircle}>{totalQuantity}</div>
                 )}
               </div>
