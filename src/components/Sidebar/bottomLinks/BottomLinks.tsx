@@ -1,3 +1,4 @@
+import { useFavoriteStore } from "@/stores/favoriteStore";
 import styles from "./bottomLinks.module.css";
 import { useCartStore } from "@/stores/cartStore";
 
@@ -9,6 +10,7 @@ interface BottomLink {
 
 const BottomLinks: React.FC = () => {
   const { totalQuantity } = useCartStore();
+  const totalFavQuantity = useFavoriteStore((state) => state.totalFavQuantity);
 
   const bottomLinks: BottomLink[] = [
     {
@@ -16,9 +18,15 @@ const BottomLinks: React.FC = () => {
       name: `CART (${totalQuantity})`,
       href: "/cart",
     },
-    { icon: "⭐", name: "FAVOURITE", href: "#" },
+    {
+      icon: "⭐",
+      name: `FAVORITES (${totalFavQuantity})`,
+      href: "/favorites",
+    },
+
     { icon: "🔍", name: "SEARCH", href: "#" },
   ];
+
   return (
     <div className={styles.bottomLinks}>
       <ul className={styles.bottomLinksList}>
