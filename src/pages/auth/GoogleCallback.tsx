@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useLoginStore } from "@/stores/loginStore";
 import axiosInstance from "@/helpers/axiosInstance";
 import { useCartStore } from "@/stores/cartStore";
+import { useFavoriteStore } from "@/stores/favoriteStore";
 
 const GoogleCallback: React.FC = () => {
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ const GoogleCallback: React.FC = () => {
           isLoggedIn: true,
           error: null,
         });
-
+        useFavoriteStore.getState().fetchFavorites();
         if (user?.id) {
           syncAfterLogin(user.id).finally(() => navigate("/"));
         } else {
