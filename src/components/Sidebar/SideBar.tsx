@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import NavBar from "./nav/Nav";
 import styles from "./sidebar.module.css"; // Upewnij się, że ten plik istnieje
 import BottomLinks from "./bottomLinks/BottomLinks";
-import SocialLink from "./socialLinks/SocialLink";
+// import SocialLink from "./socialLinks/SocialLink";
 
 const Sidebar: React.FC = () => {
   return (
@@ -17,12 +17,11 @@ const Sidebar: React.FC = () => {
       </div>
 
       <div className={styles.buttonContainer}>
-        <button className={styles.discountButton}> %Discount% </button>
+        {/* <button className={styles.discountButton}> %Discount% </button> */}
         <button className={styles.newThisWeekButton}> New this week </button>
       </div>
 
       <BottomLinks />
-      <SocialLink />
     </aside>
   );
 };
