@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLoginStore } from "@/stores/loginStore";
 import axiosInstance from "@/helpers/axiosInstance";
@@ -7,8 +7,12 @@ import { useCartStore } from "@/stores/cartStore";
 const GoogleCallback: React.FC = () => {
   const navigate = useNavigate();
   const syncAfterLogin = useCartStore((state) => state.syncAfterLogin);
+  const hasRun = useRef(false);
 
   useEffect(() => {
+    if (hasRun.current) return;
+    hasRun.current = true; // This is to prevent duplicate calls caused by StrictMode
+
     const params = new URLSearchParams(window.location.search);
     const token = params.get("token");
     const refreshToken = params.get("refreshToken");
