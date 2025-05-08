@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import axiosInstance from "@/helpers/axiosInstance";
 import { useCartStore } from "./cartStore";
+import { useFavoriteStore } from "./favoriteStore";
 
 interface User {
     id: number;
@@ -37,6 +38,7 @@ export const useLoginStore = create<LoginState>()(
                     const { accessToken, refreshToken, user } = response.data;
 
                     axiosInstance.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+
                     localStorage.setItem("refreshToken", refreshToken);
                     set({
                         token: accessToken,
@@ -44,6 +46,8 @@ export const useLoginStore = create<LoginState>()(
                         user, isLoggedIn: true,
                         error: null
                     });
+                    console.log("✅ Logged in, now fetching favorites...");
+                    useFavoriteStore.getState().fetchFavorites();
                 } catch (error) {
                     set({ error: "Failed to log in" });
                     throw error;
@@ -70,6 +74,7 @@ export const useLoginStore = create<LoginState>()(
                 set({ token: null, user: null, isLoggedIn: false, error: null });
                 delete axiosInstance.defaults.headers.common["Authorization"];
                 useCartStore.getState().resetCart();
+                useFavoriteStore.getState().resetFavorites();
             },
         }),
         {
