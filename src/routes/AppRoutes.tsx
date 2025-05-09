@@ -11,6 +11,7 @@ import Favorites from "@/pages/favorites/Favorites";
 import Search from "@/pages/search/Search";
 import Category from "@/pages/category/Category";
 import NotFound from "@/pages/notfound/NotFound";
+import NewThisWeek from "@/pages/newthisweek/NewThisWeek";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -27,6 +28,7 @@ const AppRoutes: React.FC = () => {
       <Route path="/search" element={<Search />} />
       <Route path="/category/:categoryName" element={<Category />} />
       <Route path="*" element={<NotFound />} />
+      <Route path="/new-this-week" element={<NewThisWeek />} />
     </Routes>
   );
 };

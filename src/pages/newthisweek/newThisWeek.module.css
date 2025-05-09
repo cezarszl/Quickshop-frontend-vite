@@ -1,0 +1,29 @@
+.container {
+  margin: 4rem auto;
+  padding: 1rem;
+  max-width: 1200px;
+  text-align: center;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.empty {
+  text-align: center;
+  font-size: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  text-align: center;
+}

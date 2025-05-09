@@ -36,6 +36,7 @@ interface ProductState {
     sortOption: string;
     itemsPerPage: number;
     totalCount: number;
+    newThisWeekProducts: Product[];
     toogleBrand: (brandId: number) => void;
     setFilter: (key: keyof ProductFilter, value: any) => void;
     setSortOption: (option: string) => void,
@@ -45,6 +46,7 @@ interface ProductState {
     fetchRandomProducts: () => Promise<void>
     fetchMinPrices: () => Promise<void>
     fetchFilteredProducts: () => Promise<void>;
+    fetchNewThisWeek: () => Promise<void>;
 }
 
 export const useProductStore = create<ProductState>((set, get) => ({
@@ -59,6 +61,7 @@ export const useProductStore = create<ProductState>((set, get) => ({
     sortOption: 'name-asc',
     itemsPerPage: 10,
     totalCount: 0,
+    newThisWeekProducts: [],
 
     toogleBrand: (brandId: number) => {
         const { selectedBrands } = get();
@@ -97,9 +100,9 @@ export const useProductStore = create<ProductState>((set, get) => ({
 
     fetchProducts: async () => {
         try {
-            const { itemsPerPage } = get(); // Pobierz `itemsPerPage` z aktualnego stanu
+            const { itemsPerPage } = get();
             const params = new URLSearchParams();
-            params.append('limit', itemsPerPage.toString()); // Dodaj parametr `limit`
+            params.append('limit', itemsPerPage.toString());
 
             const response = await axiosInstance.get(`/products`, { params });
             const { products, totalCount } = response.data;
@@ -151,5 +154,13 @@ export const useProductStore = create<ProductState>((set, get) => ({
         } catch (err) {
             console.error('Error fetching filtered products', err);
         }
-    }
+    },
+    fetchNewThisWeek: async () => {
+        try {
+            const response = await axiosInstance.get("/products/new-this-week");
+            set({ newThisWeekProducts: response.data });
+        } catch (error) {
+            console.error("Failed to fetch new products this week", error);
+        }
+    },
 }));
