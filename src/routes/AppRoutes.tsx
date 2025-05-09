@@ -10,6 +10,7 @@ import Profile from "@/pages/profile/Profile";
 import Favorites from "@/pages/favorites/Favorites";
 import Search from "@/pages/search/Search";
 import Category from "@/pages/category/Category";
+import NotFound from "@/pages/notfound/NotFound";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -25,6 +26,7 @@ const AppRoutes: React.FC = () => {
       <Route path="/favorites" element={<Favorites />} />
       <Route path="/search" element={<Search />} />
       <Route path="/category/:categoryName" element={<Category />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };
