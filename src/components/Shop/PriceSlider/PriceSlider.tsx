@@ -1,32 +1,32 @@
-import React, { useCallback, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useProductStore } from "@/stores/productStore";
-import debounce from "@/helpers/debounce";
 import styles from "./priceSlider.module.css";
+import useDebounce from "@/hooks/useDebounce";
 
 const PriceSlider = () => {
   const { filters, setFilter, fetchFilteredProducts } = useProductStore();
   const [minVal, setMinVal] = useState(filters.minPrice || 10);
   const [maxVal, setMaxVal] = useState(filters.maxPrice || 1000);
 
-  // Debounce api requests
-  const debouncedFetch = useCallback(debounce(fetchFilteredProducts, 500), [
-    fetchFilteredProducts,
-  ]);
+  const debouncedMin = useDebounce(minVal, 500);
+  const debouncedMax = useDebounce(maxVal, 500);
+
+  useEffect(() => {
+    setFilter("minPrice", debouncedMin);
+    setFilter("maxPrice", debouncedMax);
+    fetchFilteredProducts();
+  }, [debouncedMin, debouncedMax]);
 
   // Handle min price change
   const handleMinChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Math.min(Number(e.target.value), maxVal - 10);
     setMinVal(value);
-    setFilter("minPrice", value);
-    debouncedFetch();
   };
 
   // Handle max price change
   const handleMaxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = Math.max(Number(e.target.value), minVal + 10);
     setMaxVal(value);
-    setFilter("maxPrice", value);
-    debouncedFetch();
   };
 
   // Convert to percentage for styling
