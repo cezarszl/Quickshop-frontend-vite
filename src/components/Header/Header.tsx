@@ -7,6 +7,7 @@ import { useCartStore } from "@/stores/cartStore";
 import AccountMenu from "./AccountMenu/AccountMenu";
 import { useLoginStore } from "@/stores/loginStore";
 import { useFavoriteStore } from "@/stores/favoriteStore";
+import HeaderSearch from "./HeaderSearch/HeaderSearch";
 
 const Header: React.FC = () => {
   const { totalQuantity } = useCartStore();
@@ -31,6 +32,7 @@ const Header: React.FC = () => {
 
   return (
     <header className={styles.header}>
+      <HeaderSearch />
       <nav aria-label="Header navigation">
         <ul className={styles.navList}>
           <li className={styles.navItem}>
