@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useProductStore } from "@/stores/productStore";
 import ProductCard from "@/components/Shop/ProducCard/ProductCard";
-import styles from "./newThisWeek.module.css"; // utwórz ten plik CSS
+import styles from "./newThisWeek.module.css";
 
 const NewThisWeek: React.FC = () => {
   const { newThisWeekProducts, fetchNewThisWeek } = useProductStore();
@@ -15,9 +15,10 @@ const NewThisWeek: React.FC = () => {
   }
 
   return (
-    <div className={styles.container}>
-      <h2 className={styles.title}>🆕 New This Week</h2>
-      <div className={styles.grid}>
+    <div>
+      <div className={styles.newThisWeekTitle}>🆕 New This Week</div>
+
+      <div className={styles.newThisWeekContainer}>
         {newThisWeekProducts.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}

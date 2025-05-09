@@ -1,29 +1,23 @@
-.container {
-  margin: 4rem auto;
-  padding: 1rem;
-  max-width: 1200px;
+.newThisWeekContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 2rem;
+  margin: 0 7rem;
+}
+
+.newThisWeekTitle {
   text-align: center;
-}
-
-.title {
   font-size: 2rem;
+  margin-top: 2rem;
   margin-bottom: 2rem;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 2rem;
+  color: #333;
+  text-transform: capitalize;
 }
 
 .empty {
   text-align: center;
   font-size: 1.25rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  width: 100%;
-  text-align: center;
+  padding: 3rem 1rem;
+  color: #888;
 }
