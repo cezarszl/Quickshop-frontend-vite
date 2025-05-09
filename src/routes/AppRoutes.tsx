@@ -8,6 +8,7 @@ import Register from "@/pages/register/Register";
 import GoogleCallback from "@/pages/auth/GoogleCallback";
 import Profile from "@/pages/profile/Profile";
 import Favorites from "@/pages/favorites/Favorites";
+import Search from "@/pages/search/Search";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -21,6 +22,7 @@ const AppRoutes: React.FC = () => {
       <Route path="/auth/google/callback" element={<GoogleCallback />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/favorites" element={<Favorites />} />
+      <Route path="/search" element={<Search />} />
     </Routes>
   );
 };

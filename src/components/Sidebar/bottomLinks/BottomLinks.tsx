@@ -24,7 +24,7 @@ const BottomLinks: React.FC = () => {
       href: "/favorites",
     },
 
-    { icon: "🔍", name: "SEARCH", href: "#" },
+    { icon: "🔍", name: "SEARCH", href: "/search" },
   ];
 
   return (

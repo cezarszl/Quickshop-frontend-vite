@@ -1,0 +1,71 @@
+.searchContainer {
+  max-width: 900px;
+  min-width: 900px;
+  margin: 6rem auto 2rem;
+  padding: 0 2rem;
+}
+
+.searchForm {
+  margin-bottom: 2rem;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 1rem;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.message {
+  text-align: center;
+  font-size: 1rem;
+  color: #333;
+  margin-top: 4rem;
+}
+
+.resultsWrapper {
+  overflow-x: auto;
+}
+
+.resultsTable {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.resultsTable th,
+.resultsTable td {
+  padding: 0.75rem;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.resultsTable th {
+  background-color: #f5f7fa;
+  font-size: 0.75rem;
+  color: #242424;
+  font-weight: 400;
+  text-transform: capitalize;
+}
+
+.imageCell img {
+  max-width: 100px;
+  height: auto;
+  border-radius: 6px;
+}
+
+.nameCell h5 {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #242424;
+  margin: 0;
+}
+.nameCell a {
+    text-decoration: none;
+}
+
+.priceCell span {
+  font-size: 0.9rem;
+  color: #333;
+}
