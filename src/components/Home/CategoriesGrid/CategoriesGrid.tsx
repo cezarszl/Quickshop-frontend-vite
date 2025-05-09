@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useProductStore } from "@/stores/productStore";
 import styles from "./categoriesGrid.module.css";
 import axiosInstance from "@/helpers/axiosInstance";
+import { Link } from "react-router-dom";
 
 const CategoriesGrid: React.FC = () => {
   const { randomProducts, fetchRandomProducts, minPrices, fetchMinPrices } =
@@ -22,27 +23,29 @@ const CategoriesGrid: React.FC = () => {
   return (
     <div className={styles.gridContainer}>
       {randomProducts.map((product) => (
-        <div key={product.id} className={styles.productCard}>
-          {/* <Link to={`/product/${product.id}`}> */}
-          <div className={styles.productImageContainer}>
-            <img
-              className={styles.productImage}
-              src={`${baseUrl}${product.imageUrl}`}
-              alt={product.name}
-            />
-            <div className={styles.productInfo}>
-              <h1 className={styles.productCategory}>{product.categoryName}</h1>
-              {minPricesMap[product.categoryId] !== undefined ? (
-                <p className={styles.productPrice}>
-                  From ${minPricesMap[product.categoryId].toFixed(2)}
-                </p>
-              ) : (
-                <p className={styles.productPrice}>Price not available</p>
-              )}
+        <Link to={`/category/${product.categoryName.toLowerCase()}`}>
+          <div key={product.id} className={styles.productCard}>
+            <div className={styles.productImageContainer}>
+              <img
+                className={styles.productImage}
+                src={`${baseUrl}${product.imageUrl}`}
+                alt={product.name}
+              />
+              <div className={styles.productInfo}>
+                <h1 className={styles.productCategory}>
+                  {product.categoryName}
+                </h1>
+                {minPricesMap[product.categoryId] !== undefined ? (
+                  <p className={styles.productPrice}>
+                    From ${minPricesMap[product.categoryId].toFixed(2)}
+                  </p>
+                ) : (
+                  <p className={styles.productPrice}>Price not available</p>
+                )}
+              </div>
             </div>
           </div>
-          {/* </Link> */}
-        </div>
+        </Link>
       ))}
     </div>
   );

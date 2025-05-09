@@ -1,0 +1,15 @@
+.categoryContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 2rem;
+  margin: 0 7rem 0 7rem;
+}
+
+.categoryTitle {
+  text-align: center;
+  font-size: 2rem;
+  margin-top: 2rem;
+  color: #333;
+  text-transform: capitalize;
+}

@@ -18,6 +18,7 @@ export interface MinPrice {
 export interface ProductFilter {
     name?: string;
     categoryId?: number;
+    categoryName?: string;
     brandIds?: number[];
     colorId?: number;
     minPrice?: number;
