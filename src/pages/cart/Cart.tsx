@@ -1,11 +1,9 @@
 import { useEffect } from "react";
 import { useCartStore } from "@/stores/cartStore";
-import axiosInstance from "@/helpers/axiosInstance";
 import styles from "./cart.module.css";
 import QuantityControl from "@/components/Cart/QuantityControl/QuantityControl";
 import { FaShoppingBag } from "react-icons/fa";
 
-const baseUrl = axiosInstance.defaults.baseURL;
 const CartPage: React.FC = () => {
   const { cartItems, fetchCart, getCartTotal, cartId } = useCartStore();
 
@@ -44,7 +42,7 @@ const CartPage: React.FC = () => {
                     <td className={styles.cartProductImage}>
                       <a href="#">
                         <img
-                          src={`${baseUrl}${item.productDetails?.imageUrl}`}
+                          src={item.productDetails?.imageUrl}
                           alt={item.productDetails.name}
                         ></img>
                       </a>

@@ -63,7 +63,7 @@ const HeaderSearch: React.FC = () => {
               <li key={product.id} className={styles.dropdownItem}>
                 <Link to={`/product/${product.id}`}>
                   <img
-                    src={`${axiosInstance.defaults.baseURL}${product.imageUrl}`}
+                    src={product.imageUrl}
                     alt={product.name}
                     className={styles.productImage}
                   />

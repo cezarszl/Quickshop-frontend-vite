@@ -1,11 +1,8 @@
 import { useEffect } from "react";
-import axiosInstance from "@/helpers/axiosInstance";
 import styles from "./favorites.module.css";
 import { FaStar, FaTrash } from "react-icons/fa";
 import { useFavoriteStore } from "@/stores/favoriteStore";
 import { useLoginStore } from "@/stores/loginStore";
-
-const baseUrl = axiosInstance.defaults.baseURL;
 
 const Favorites: React.FC = () => {
   const { favorites, fetchFavorites, removeFavorite } = useFavoriteStore();
@@ -52,7 +49,7 @@ const Favorites: React.FC = () => {
                     <td className={styles.favoriteProductImage}>
                       <a href="#">
                         <img
-                          src={`${baseUrl}${item.productDetails?.imageUrl}`}
+                          src={item.productDetails?.imageUrl}
                           alt={item.productDetails?.name}
                         />
                       </a>

@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useProductStore } from "@/stores/productStore";
 import styles from "./product.module.css";
-import axiosInstance from "@/helpers/axiosInstance";
 
 const Product: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -17,7 +16,6 @@ const Product: React.FC = () => {
   if (!selectedProduct) {
     return <div className={styles.loading}>Loading...</div>;
   }
-  console.log(selectedProduct.imageUrl);
   return (
     <div className={styles.container}>
       <div className={styles.imageWrapper}>

@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useSearchStore } from "@/stores/searchStore";
-import axiosInstance from "@/helpers/axiosInstance";
 import styles from "./search.module.css";
-
-const baseUrl = axiosInstance.defaults.baseURL;
 
 const SearchPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -76,10 +73,7 @@ const SearchPage: React.FC = () => {
                 <tr key={product.id}>
                   <td className={styles.imageCell}>
                     <a href={`/product/${product.id}`}>
-                      <img
-                        src={`${baseUrl}${product.imageUrl}`}
-                        alt={product.name}
-                      />
+                      <img src={product.imageUrl} alt={product.name} />
                     </a>
                   </td>
                   <td className={styles.nameCell}>

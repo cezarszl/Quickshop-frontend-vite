@@ -1,6 +1,5 @@
 import { Product } from "@/stores/productStore";
 import styles from "./productCard.module.css";
-import axiosInstance from "@/helpers/axiosInstance";
 import { useCartStore } from "@/stores/cartStore";
 import { useFavoriteStore } from "@/stores/favoriteStore";
 import { useLoginStore } from "@/stores/loginStore";
@@ -9,8 +8,6 @@ import { useEffect, useState } from "react";
 interface ProductCardProps {
   product: Product;
 }
-
-const baseUrl = axiosInstance.defaults.baseURL;
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const addToCart = useCartStore((state) => state.addToCart);
@@ -50,11 +47,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     <div className={styles.col12}>
       <div className={styles.productCard}>
         <div className={styles.productImage}>
-          <img
-            src={`${baseUrl}${product.imageUrl}`}
-            alt={product.name}
-            width={444}
-          />
+          <img src={product.imageUrl} alt={product.name} width={444} />
         </div>
 
         <div className={styles.productDescription}>
