@@ -8,6 +8,11 @@ export interface Product {
     imageUrl: string;
     categoryName: string;
     categoryId: number;
+    brandName?: string;
+    colorName?: string;
+    description: string;
+    createdAt?: string;
+    updatedAt?: string;
 }
 
 export interface MinPrice {
@@ -37,6 +42,7 @@ interface ProductState {
     itemsPerPage: number;
     totalCount: number;
     newThisWeekProducts: Product[];
+    selectedProduct: Product | null;
     toogleBrand: (brandId: number) => void;
     setFilter: (key: keyof ProductFilter, value: any) => void;
     setSortOption: (option: string) => void,
@@ -47,6 +53,7 @@ interface ProductState {
     fetchMinPrices: () => Promise<void>
     fetchFilteredProducts: () => Promise<void>;
     fetchNewThisWeek: () => Promise<void>;
+    fetchProductById: (id: number) => Promise<void>;
 }
 
 export const useProductStore = create<ProductState>((set, get) => ({
@@ -62,6 +69,7 @@ export const useProductStore = create<ProductState>((set, get) => ({
     itemsPerPage: 10,
     totalCount: 0,
     newThisWeekProducts: [],
+    selectedProduct: null,
 
     toogleBrand: (brandId: number) => {
         const { selectedBrands } = get();
@@ -161,6 +169,14 @@ export const useProductStore = create<ProductState>((set, get) => ({
             set({ newThisWeekProducts: response.data });
         } catch (error) {
             console.error("Failed to fetch new products this week", error);
+        }
+    },
+    fetchProductById: async (id: number) => {
+        try {
+            const response = await axiosInstance.get(`/products/${id}`);
+            set({ selectedProduct: response.data });
+        } catch (err) {
+            console.error('Error fetching product by ID', err);
         }
     },
 }));

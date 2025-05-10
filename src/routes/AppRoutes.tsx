@@ -12,6 +12,7 @@ import Search from "@/pages/search/Search";
 import Category from "@/pages/category/Category";
 import NotFound from "@/pages/notfound/NotFound";
 import NewThisWeek from "@/pages/newthisweek/NewThisWeek";
+import Product from "@/pages/product/Product";
 
 const AppRoutes: React.FC = () => {
   return (
@@ -29,6 +30,7 @@ const AppRoutes: React.FC = () => {
       <Route path="/category/:categoryName" element={<Category />} />
       <Route path="*" element={<NotFound />} />
       <Route path="/new-this-week" element={<NewThisWeek />} />
+      <Route path="/product/:id" element={<Product />} />
     </Routes>
   );
 };

@@ -1,0 +1,65 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 4rem auto;
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 0.75rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.04);
+}
+
+.imageWrapper {
+  flex: 1;
+  min-width: 320px;
+  max-width: 500px;
+}
+
+.image {
+  width: 100%;
+  border-radius: 0.5rem;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.details {
+  flex: 1;
+  min-width: 300px;
+}
+
+.name {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #222;
+}
+
+.price {
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: #e48c00;
+  margin-bottom: 1rem;
+}
+
+.description {
+  font-size: 1.125rem;
+  color: #444;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.meta {
+  font-size: 1rem;
+  color: #555;
+  margin-top: 0.5rem;
+}
+
+.loading {
+  text-align: center;
+  padding: 4rem;
+  font-size: 1.5rem;
+  color: #666;
+}
