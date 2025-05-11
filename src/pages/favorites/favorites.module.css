@@ -37,6 +37,9 @@
   padding: 0 1rem;
 }
 
+.favoriteProductName a {
+  text-decoration: none;
+}
 
 /* Table styles */
 .table {

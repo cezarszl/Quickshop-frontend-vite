@@ -3,6 +3,7 @@ import styles from "./favorites.module.css";
 import { FaStar, FaTrash } from "react-icons/fa";
 import { useFavoriteStore } from "@/stores/favoriteStore";
 import { useLoginStore } from "@/stores/loginStore";
+import { Link } from "react-router-dom";
 
 const Favorites: React.FC = () => {
   const { favorites, fetchFavorites, removeFavorite } = useFavoriteStore();
@@ -47,15 +48,17 @@ const Favorites: React.FC = () => {
                 {favorites.map((item) => (
                   <tr key={item.productId}>
                     <td className={styles.favoriteProductImage}>
-                      <a href="#">
+                      <Link to={`/product/${item.productId}`}>
                         <img
                           src={item.productDetails?.imageUrl}
                           alt={item.productDetails?.name}
                         />
-                      </a>
+                      </Link>
                     </td>
-                    <td className={styles.favoriteProductDesc}>
-                      <h5>{item.productDetails?.name}</h5>
+                    <td className={styles.favoriteProductName}>
+                      <Link to={`/product/${item.productId}`}>
+                        <h5>{item.productDetails?.name}</h5>
+                      </Link>
                     </td>
                     <td className={styles.price}>
                       <span>${item.productDetails?.price}</span>

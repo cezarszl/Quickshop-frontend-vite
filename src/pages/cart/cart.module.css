@@ -34,6 +34,9 @@
 .cartProductImage {
   width: 25%;
 }
+.cartProductName a {
+  text-decoration: none;
+}
 
 .col8 {
   flex: 0 0 67%;

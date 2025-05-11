@@ -4,6 +4,7 @@ import { useCartStore } from "@/stores/cartStore";
 import { useFavoriteStore } from "@/stores/favoriteStore";
 import { useLoginStore } from "@/stores/loginStore";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 interface ProductCardProps {
   product: Product;
@@ -47,7 +48,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     <div className={styles.col12}>
       <div className={styles.productCard}>
         <div className={styles.productImage}>
-          <img src={product.imageUrl} alt={product.name} width={444} />
+          <Link to={`/product/${product.id}`}>
+            <img src={product.imageUrl} alt={product.name} width={444} />
+          </Link>
         </div>
 
         <div className={styles.productDescription}>

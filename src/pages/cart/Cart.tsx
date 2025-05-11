@@ -3,6 +3,7 @@ import { useCartStore } from "@/stores/cartStore";
 import styles from "./cart.module.css";
 import QuantityControl from "@/components/Cart/QuantityControl/QuantityControl";
 import { FaShoppingBag } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const CartPage: React.FC = () => {
   const { cartItems, fetchCart, getCartTotal, cartId } = useCartStore();
@@ -40,15 +41,17 @@ const CartPage: React.FC = () => {
                 {cartItems.map((item) => (
                   <tr key={`${item.productId}`}>
                     <td className={styles.cartProductImage}>
-                      <a href="#">
+                      <Link to={`/product/${item.productId}`}>
                         <img
                           src={item.productDetails?.imageUrl}
                           alt={item.productDetails.name}
                         ></img>
-                      </a>
+                      </Link>
                     </td>
-                    <td className={styles.cartProductDesc}>
-                      <h5>{item.productDetails.name}</h5>
+                    <td className={styles.cartProductName}>
+                      <Link to={`/product/${item.productId}`}>
+                        <h5>{item.productDetails.name}</h5>
+                      </Link>
                     </td>
                     <td className={styles.price}>
                       <span>${item.productDetails.price}</span>
