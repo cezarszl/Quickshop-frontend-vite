@@ -39,7 +39,6 @@ export const useFavoriteStore = create<FavoriteState>()((set) => ({
                     Authorization: `Bearer ${token}`,
                 },
             });
-            console.log("📦 Fetched favorites from API:", rawFavorites);
 
             const productDetailsPromises = rawFavorites.map((fav: any) =>
                 axiosInstance.get(`/products/${fav.productId}`)
