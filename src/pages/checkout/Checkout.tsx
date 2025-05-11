@@ -3,6 +3,7 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useCartStore } from "@/stores/cartStore";
+import axiosInstance from "@/helpers/axiosInstance";
 
 const registerSchema = z.object({
   firstName: z.string().min(1, "Imię jest wymagane"),
@@ -19,11 +20,28 @@ const Checkout: React.FC = () => {
     resolver: zodResolver(registerSchema),
   });
 
-  const onSubmit = (data: RegisterForm) => {
-    console.log(data);
-  };
+  const { cartItems, getCartTotal } = useCartStore();
 
-  const { getCartTotal } = useCartStore();
+  const onSubmit = async (data: RegisterForm) => {
+    try {
+      const formattedCart = cartItems.map((item) => ({
+        name: item.productDetails.name,
+        price: item.productDetails.price,
+        quantity: item.quantity,
+      }));
+
+      const response = await axiosInstance.post("/payments/checkout-session", {
+        customer: data,
+        cart: formattedCart,
+      });
+
+      if (response.data.url) {
+        window.location.href = response.data.url;
+      }
+    } catch (error) {
+      console.error("Stripe checkout failed:", error);
+    }
+  };
 
   return (
     <div className={styles.mainContent}>
@@ -64,25 +82,27 @@ const Checkout: React.FC = () => {
               </select>
             </div>
           </div>
+
           <div className={styles.mainContentCol4}>
             <div className={styles.checkoutSummary}>
               <h5>Cart Total</h5>
               <ul className={styles.summaryTable}>
                 <li>
-                  <span>subtotal:</span>
+                  <span>Subtotal:</span>
                   <span>${getCartTotal().toFixed(2)}</span>
                 </li>
                 <li>
-                  <span>delievery:</span>
+                  <span>Delivery:</span>
                   <span>Free</span>
                 </li>
                 <li>
-                  <span>total:</span>
+                  <span>Total:</span>
                   <span>${getCartTotal().toFixed(2)}</span>
                 </li>
               </ul>
+
               <button type="submit" className={styles.checkoutBtn}>
-                <a href="/checkout">Checkout</a>
+                Proceed to Payment
               </button>
             </div>
           </div>
