@@ -154,6 +154,7 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
   text-decoration: none;
+  display: inline-block;
 }
 
 .primaryButton:hover {
@@ -171,6 +172,7 @@
   cursor: pointer;
   transition: all 0.3s ease;
   text-decoration: none;
+  display: inline-block;
 }
 
 .secondaryButton:hover {
@@ -182,7 +184,8 @@
   display: flex;
   gap: 1rem;
   justify-content: center;
-  margin-top: 1.5rem;
+  margin-top: 0;
+  width: 100%;
 }
 
 /* Not Logged In State */
@@ -191,6 +194,7 @@
   height: 70px;
   color: #fbb710;
   margin-bottom: 1.5rem;
+  margin-top: 1rem;
 }
 
 .message {
