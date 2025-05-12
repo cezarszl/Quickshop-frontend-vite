@@ -4,6 +4,12 @@ import axiosInstance from "@/helpers/axiosInstance";
 interface OrderItem {
     productId: number;
     quantity: number;
+    productDetails?: {
+        id: number;
+        name: string;
+        imageUrl: string;
+        price: number;
+    }
 }
 
 interface Order {
@@ -34,10 +40,30 @@ export const useOrderStore = create<OrderState>()((set) => ({
 
     fetchUserOrders: async (userId: number) => {
         try {
-            const response = await axiosInstance.get(`/orders/user/${userId}`);
-            set({ orders: response.data });
+            const { data: ordersRaw } = await axiosInstance.get(`/orders/user/${userId}`);
+
+            const enrichedOrders = await Promise.all(
+                ordersRaw.map(async (order: any) => {
+                    const enrichedItems = await Promise.all(
+                        order.items.map(async (item: any) => {
+                            const { data: productDetails } = await axiosInstance.get(`/products/${item.productId}`);
+                            return {
+                                ...item,
+                                productDetails,
+                            };
+                        })
+                    );
+
+                    return {
+                        ...order,
+                        items: enrichedItems,
+                    };
+                })
+            );
+
+            set({ orders: enrichedOrders });
         } catch (error) {
-            set({ error: "Failed to fetch orders" });
+            set({ error: "Failed to fetch user orders" });
             console.error(error);
         }
     },
