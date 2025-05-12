@@ -11,17 +11,31 @@ const NewThisWeek: React.FC = () => {
   }, [fetchNewThisWeek]);
 
   if (!newThisWeekProducts || newThisWeekProducts.length === 0) {
-    return <div className={styles.empty}>No new products this week.</div>;
+    return (
+      <div className={styles.categoryPage}>
+        <div className={styles.categoryContainer}>
+          <div className={styles.categoryContent}>
+            <h1 className={styles.categoryTitle}>New This Week</h1>
+            <div className={styles.empty}>
+              <p>No new products this week.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
-    <div>
-      <div className={styles.newThisWeekTitle}>🆕 New This Week</div>
-
-      <div className={styles.newThisWeekContainer}>
-        {newThisWeekProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
+    <div className={styles.categoryPage}>
+      <div className={styles.categoryContainer}>
+        <div className={styles.categoryContent}>
+          <h1 className={styles.categoryTitle}>New This Week</h1>
+          <div className={styles.productsGrid}>
+            {newThisWeekProducts.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
