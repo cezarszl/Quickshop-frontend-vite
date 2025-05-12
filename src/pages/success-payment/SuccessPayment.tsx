@@ -17,17 +17,27 @@ const SuccessPayment: React.FC = () => {
     if (hasRun.current) return;
     hasRun.current = true;
 
-    if (!user) return;
-
     const items = cartItems.map((item) => ({
       productId: item.productId,
       quantity: item.quantity,
     }));
 
-    createOrder(user.id, items, getCartTotal()).finally(() => {
+    const finalize = async () => {
+      if (user) {
+        try {
+          await createOrder(user.id, items, getCartTotal());
+        } catch (err) {
+          console.error("Failed to create order:", err);
+        }
+      } else {
+        console.info("Guest checkout successful (no order saved)");
+      }
+
       resetCart();
       setIsLoading(false);
-    });
+    };
+
+    finalize();
   }, [cartItems, createOrder, getCartTotal, resetCart, user]);
 
   if (isLoading)
