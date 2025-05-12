@@ -46,7 +46,6 @@ export const useLoginStore = create<LoginState>()(
                         user, isLoggedIn: true,
                         error: null
                     });
-                    console.log("✅ Logged in, now fetching favorites...");
                     useFavoriteStore.getState().fetchFavorites();
                 } catch (error) {
                     set({ error: "Failed to log in" });
