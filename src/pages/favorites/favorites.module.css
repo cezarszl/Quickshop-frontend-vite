@@ -1,4 +1,4 @@
-/* Cart empty state */
+/* Favorites empty state */
 .emptyFavorites {
   display: flex;
   flex-direction: column;
@@ -17,28 +17,34 @@
   font-size: 6.25rem;
 }
 
-/* Cart layout */
+/* Favorites layout */
 .favoritesTableArea {
   margin: 8rem auto 0;
   padding-top: 3.75rem;
   padding-right: 6rem;
   width: 100%;
+  max-width: 1200px;
 }
 
 .row {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
 /* Product columns */
-
-.col8 {
-  flex: 0 0 100%;
-  padding: 0 1rem;
+.favoriteProductImage {
+  width: 25%;
 }
 
 .favoriteProductName a {
   text-decoration: none;
+}
+
+.col8 {
+  flex: 0 0 100%;
+  max-width: 100%;
+  padding: 0 1rem;
 }
 
 /* Table styles */
@@ -77,11 +83,44 @@
   margin: 0;
 }
 
-
-
 /* Button styles */
 .removeBtn {
   font-size: 1.5rem;
+  cursor: pointer;
 }
 
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .favoritesTableArea {
+    padding-right: 2rem;
+    padding-left: 2rem;
+  }
+}
 
+@media (max-width: 768px) {
+  .favoritesTableArea {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+
+  .table th,
+  .table td {
+    padding: 0.5rem;
+  }
+
+  .favoriteProductImage {
+    width: 20%;
+  }
+}
+
+@media (max-width: 480px) {
+  .table {
+    font-size: 0.875rem;
+  }
+
+  .table td h5 {
+    font-size: 0.9rem;
+  }
+}
