@@ -8,6 +8,7 @@ interface User {
     id: number;
     email: string;
     name: string;
+    createdAt: string;
     googleId?: string;
 }
 
@@ -43,9 +44,11 @@ export const useLoginStore = create<LoginState>()(
                     set({
                         token: accessToken,
                         refreshToken,
-                        user, isLoggedIn: true,
+                        user,
+                        isLoggedIn: true,
                         error: null
                     });
+                    console.log(user)
                     useFavoriteStore.getState().fetchFavorites();
                 } catch (error) {
                     set({ error: "Failed to log in" });
