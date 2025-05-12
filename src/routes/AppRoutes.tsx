@@ -6,7 +6,7 @@ import Checkout from "@/pages/checkout/Checkout";
 import Login from "@/pages/login/Login";
 import Register from "@/pages/register/Register";
 import GoogleCallback from "@/pages/auth/GoogleCallback";
-import Profile from "@/pages/profile/Profile";
+import Profile from "@/pages/myprofile/MyProfile";
 import Favorites from "@/pages/favorites/Favorites";
 import Search from "@/pages/search/Search";
 import Category from "@/pages/category/Category";

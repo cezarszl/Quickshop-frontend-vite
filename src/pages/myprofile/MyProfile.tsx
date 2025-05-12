@@ -1,7 +1,7 @@
 import { useLoginStore } from "@/stores/loginStore";
-import styles from "./profile.module.css";
+import styles from "./myProfile.module.css";
 
-const Profile: React.FC = () => {
+const MyProfile: React.FC = () => {
   const user = useLoginStore((state) => state.user);
 
   if (!user) {
@@ -25,4 +25,4 @@ const Profile: React.FC = () => {
   );
 };
 
-export default Profile;
+export default MyProfile;
