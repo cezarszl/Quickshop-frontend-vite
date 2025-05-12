@@ -4,7 +4,7 @@ import { useProductStore } from "@/stores/productStore";
 import ProductCard from "@/components/Shop/ProducCard/ProductCard";
 import styles from "./category.module.css";
 
-const CategoryPage: React.FC = () => {
+const Category: React.FC = () => {
   const { categoryName } = useParams();
   const { products, setFilter, fetchFilteredProducts } = useProductStore();
 
@@ -16,19 +16,19 @@ const CategoryPage: React.FC = () => {
   }, [categoryName, setFilter, fetchFilteredProducts]);
 
   return (
-    <>
-      <div className={styles.sideBar}></div>
-      <div className={styles.productsGrid}>
-        <div className={styles.categoryTitle}>{categoryName}</div>
-
-        <div className={styles.categoryContainer}>
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+    <div className={styles.categoryPage}>
+      <div className={styles.categoryContainer}>
+        <div className={styles.categoryContent}>
+          <h1 className={styles.categoryTitle}>{categoryName}</h1>
+          <div className={styles.productsGrid}>
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
-export default CategoryPage;
+export default Category;
