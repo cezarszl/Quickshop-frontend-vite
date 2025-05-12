@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 import axiosInstance from "@/helpers/axiosInstance";
 import { useLoginStore } from "./loginStore";
 
@@ -24,81 +25,84 @@ interface FavoriteState {
     resetFavorites: () => void;
 }
 
-export const useFavoriteStore = create<FavoriteState>()((set) => ({
-    favorites: [],
-    totalFavQuantity: 0,
-    error: null,
+export const useFavoriteStore = create<FavoriteState>()(
+    persist(
+        (set) => ({
+            favorites: [],
+            totalFavQuantity: 0,
+            error: null,
 
-    fetchFavorites: async () => {
-        try {
-            const token = useLoginStore.getState().token;
+            fetchFavorites: async () => {
+                try {
+                    const token = useLoginStore.getState().token;
+                    if (!token) return;
 
-            if (!token) return;
-            const { data: rawFavorites } = await axiosInstance.get("/favorites", {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
+                    const { data: rawFavorites } = await axiosInstance.get("/favorites", {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    });
 
-            const productDetailsPromises = rawFavorites.map((fav: any) =>
-                axiosInstance.get(`/products/${fav.productId}`)
-            );
-            const productDetailsResponses = await Promise.all(productDetailsPromises);
+                    const productDetailsPromises = rawFavorites.map((fav: any) =>
+                        axiosInstance.get(`/products/${fav.productId}`)
+                    );
+                    const productDetailsResponses = await Promise.all(productDetailsPromises);
 
-            const favorites = rawFavorites.map((fav: any, i: number) => ({
-                productId: fav.productId,
-                productDetails: productDetailsResponses[i].data,
-            }));
+                    const favorites = rawFavorites.map((fav: any, i: number) => ({
+                        productId: fav.productId,
+                        productDetails: productDetailsResponses[i].data,
+                    }));
 
-            set({ favorites, totalFavQuantity: favorites.length });
-        } catch (error) {
-            set({ error: "Failed to fetch favorites" });
-            console.error(error);
+                    set({ favorites, totalFavQuantity: favorites.length });
+                } catch (error) {
+                    set({ error: "Failed to fetch favorites" });
+                    console.error(error);
+                }
+            },
+
+            addFavorite: async (productId: number) => {
+                try {
+                    await axiosInstance.post("/favorites", { productId });
+                    const { data: productDetails } = await axiosInstance.get(`/products/${productId}`);
+                    set((state) => {
+                        const updatedFavorites = [...state.favorites, { productId, productDetails }];
+                        return {
+                            favorites: updatedFavorites,
+                            totalFavQuantity: updatedFavorites.length,
+                        };
+                    });
+                } catch (error) {
+                    set({ error: "Failed to add favorite" });
+                    console.error(error);
+                }
+            },
+
+            removeFavorite: async (productId: number) => {
+                try {
+                    await axiosInstance.delete(`/favorites/${productId}`);
+                    set((state) => {
+                        const updatedFavorites = state.favorites.filter((f) => f.productId !== productId);
+                        return {
+                            favorites: updatedFavorites,
+                            totalFavQuantity: updatedFavorites.length,
+                        };
+                    });
+                } catch (error) {
+                    set({ error: "Failed to remove favorite" });
+                    console.error(error);
+                }
+            },
+
+            resetFavorites: () => {
+                set({ favorites: [], totalFavQuantity: 0, error: null });
+            },
+        }),
+        {
+            name: "favorites-storage",
+            partialize: (state) => ({
+                favorites: state.favorites,
+                totalFavQuantity: state.totalFavQuantity,
+            }),
         }
-    },
-
-    addFavorite: async (productId: number) => {
-        try {
-            await axiosInstance.post("/favorites", { productId });
-
-            const { data: productDetails } = await axiosInstance.get(
-                `/products/${productId}`
-            );
-
-            set((state) => {
-                const updatedFavorites = [
-                    ...state.favorites,
-                    { productId, productDetails },
-                ];
-                return {
-                    favorites: updatedFavorites,
-                    totalFavQuantity: updatedFavorites.length,
-                };
-            });
-        } catch (error) {
-            set({ error: "Failed to add favorite" });
-            console.error(error);
-        }
-    },
-
-    removeFavorite: async (productId: number) => {
-        try {
-            await axiosInstance.delete(`/favorites/${productId}`);
-            set((state) => {
-                const updatedFavorites = state.favorites.filter(
-                    (f) => f.productId !== productId
-                );
-                return {
-                    favorites: updatedFavorites,
-                    totalFavQuantity: updatedFavorites.length,
-                };
-            });
-        } catch (error) {
-            set({ error: "Failed to remove favorite" });
-            console.error(error);
-        }
-    },
-    resetFavorites: () => {
-        set({ favorites: [], totalFavQuantity: 0, error: null });
-    },
-}));
+    )
+);
