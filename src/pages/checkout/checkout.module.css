@@ -53,7 +53,7 @@
   text-transform: capitalize;
 }
 .checkoutBtn {
-  margin-top: 4rem;
+  margin-top: 2rem;
 }
 
 .checkoutBtn, .checkoutBtn a {
@@ -119,6 +119,10 @@
   margin-bottom: 16px;
 }
 
-
+.warning {
+  color: red;
+  font-weight: bold;
+  font-size: 13px;
+}
 
 

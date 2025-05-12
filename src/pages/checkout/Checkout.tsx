@@ -22,6 +22,8 @@ const Checkout: React.FC = () => {
 
   const { cartItems, getCartTotal } = useCartStore();
 
+  const isCartEmpty = cartItems.length === 0;
+
   const onSubmit = async (data: RegisterForm) => {
     try {
       const formattedCart = cartItems.map((item) => ({
@@ -100,8 +102,17 @@ const Checkout: React.FC = () => {
                   <span>${getCartTotal().toFixed(2)}</span>
                 </li>
               </ul>
-
-              <button type="submit" className={styles.checkoutBtn}>
+              {isCartEmpty && (
+                <p className={styles.warning}>
+                  Your cart is empty. Add products before proceeding to
+                  checkout.
+                </p>
+              )}
+              <button
+                type="submit"
+                disabled={isCartEmpty}
+                className={styles.checkoutBtn}
+              >
                 Proceed to Payment
               </button>
             </div>
