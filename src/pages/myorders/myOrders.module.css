@@ -1,0 +1,25 @@
+.orderContainer {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .orderCard {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .message {
+    text-align: center;
+    padding: 2rem;
+    font-size: 1.2rem;
+  }
+  
