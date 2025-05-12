@@ -18,10 +18,10 @@ const AccountMenu: React.FC<AccountMenuProps> = () => {
     <div className={styles.accountMenu}>
       <ul>
         <li>
-          <Link to="/profile">My profile</Link>
+          <Link to="/myprofile">My profile</Link>
         </li>
         <li>
-          <Link to="/orders">My orders</Link>
+          <Link to="/myorders">My orders</Link>
         </li>
       </ul>
       {isLoggedIn ? (
