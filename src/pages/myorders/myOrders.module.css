@@ -1,25 +1,52 @@
+
 .orderContainer {
-    padding: 2rem;
     max-width: 800px;
-    margin: 0 auto;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
   
   .title {
-    font-size: 2rem;
+    font-size: 1.8rem;
     margin-bottom: 1.5rem;
+    text-align: center;
+    color: #333;
   }
   
   .orderCard {
-    border: 1px solid #ccc;
+    background: #fff;
     padding: 1rem;
     margin-bottom: 1.5rem;
+    border: 1px solid #ddd;
     border-radius: 8px;
-    background-color: #f9f9f9;
+  }
+  
+  .orderCard p {
+    margin: 0.5rem 0;
+  }
+  
+  .productRow {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+    padding: 0.5rem 0;
+    border-top: 1px solid #eee;
+  }
+  
+  .productImage {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 5px;
   }
   
   .message {
     text-align: center;
-    padding: 2rem;
+    margin-top: 2rem;
     font-size: 1.2rem;
+    color: #666;
   }
   
