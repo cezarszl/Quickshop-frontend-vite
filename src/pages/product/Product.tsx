@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useProductStore } from "@/stores/productStore";
 import styles from "./product.module.css";
+import { FaTag, FaPalette, FaList } from "react-icons/fa";
 
 const Product: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -16,6 +17,7 @@ const Product: React.FC = () => {
   if (!selectedProduct) {
     return <div className={styles.loading}>Loading...</div>;
   }
+
   return (
     <div className={styles.container}>
       <div className={styles.imageWrapper}>
@@ -30,13 +32,13 @@ const Product: React.FC = () => {
         <p className={styles.price}>${selectedProduct.price.toFixed(2)}</p>
         <p className={styles.description}>{selectedProduct.description}</p>
         <p className={styles.meta}>
-          <strong>Brand:</strong> {selectedProduct.brandName}
+          <FaTag /> <strong>Brand:</strong> {selectedProduct.brandName}
         </p>
         <p className={styles.meta}>
-          <strong>Color:</strong> {selectedProduct.colorName}
+          <FaPalette /> <strong>Color:</strong> {selectedProduct.colorName}
         </p>
         <p className={styles.meta}>
-          <strong>Category:</strong> {selectedProduct.categoryName}
+          <FaList /> <strong>Category:</strong> {selectedProduct.categoryName}
         </p>
       </div>
     </div>

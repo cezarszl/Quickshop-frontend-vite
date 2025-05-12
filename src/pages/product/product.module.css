@@ -1,3 +1,4 @@
+/* Product Page Styles */
 .container {
   display: flex;
   flex-wrap: wrap;
@@ -6,55 +7,122 @@
   gap: 3rem;
   max-width: 1200px;
   margin: 4rem auto;
-  padding: 1rem;
-  background-color: #fff;
-  border-radius: 0.75rem;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.04);
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.container::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg, 
+    transparent 0%, 
+    rgba(251, 183, 16, 0.1) 50%, 
+    transparent 100%
+  );
+  transform: rotate(-45deg);
+  z-index: 1;
+  pointer-events: none;
 }
 
 .imageWrapper {
   flex: 1;
   min-width: 320px;
   max-width: 500px;
+  position: relative;
+  z-index: 2;
 }
 
 .image {
   width: 100%;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   object-fit: cover;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.image:hover {
+  transform: scale(1.02);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
 }
 
 .details {
   flex: 1;
   min-width: 300px;
+  position: relative;
+  z-index: 2;
 }
 
 .name {
-  font-size: 2rem;
-  font-weight: 600;
+  font-size: 2.25rem;
+  font-weight: 700;
   margin-bottom: 1rem;
   color: #222;
+  position: relative;
+}
+
+.name::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 0;
+  width: 4rem;
+  height: 4px;
+  background-color: #fbb710;
+  border-radius: 2px;
 }
 
 .price {
-  font-size: 1.75rem;
+  font-size: 2rem;
   font-weight: bold;
-  color: #e48c00;
-  margin-bottom: 1rem;
+  color: #fbb710;
+  margin-bottom: 1.5rem;
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  background-color: rgba(251, 183, 16, 0.1);
+  border-radius: 0.5rem;
 }
 
 .description {
   font-size: 1.125rem;
-  color: #444;
-  margin-bottom: 1.5rem;
+  color: #555;
+  margin-bottom: 2rem;
   line-height: 1.6;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.description::before {
+  content: '"';
+  position: absolute;
+  left: 0;
+  top: -0.5rem;
+  font-size: 3rem;
+  color: #fbb710;
+  opacity: 0.3;
 }
 
 .meta {
   font-size: 1rem;
-  color: #555;
-  margin-top: 0.5rem;
+  color: #666;
+  margin-top: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.meta strong {
+  color: #333;
+  min-width: 100px;
+  display: inline-block;
 }
 
 .loading {
@@ -62,4 +130,52 @@
   padding: 4rem;
   font-size: 1.5rem;
   color: #666;
+  background-color: #f9f9f9;
+  border-radius: 1rem;
+  max-width: 1200px;
+  margin: 4rem auto;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    gap: 2rem;
+  }
+
+  .imageWrapper,
+  .details {
+    min-width: 100%;
+    max-width: 100%;
+  }
+
+  .name {
+    font-size: 1.75rem;
+    text-align: center;
+  }
+
+  .name::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .price {
+    text-align: center;
+    width: 100%;
+  }
+
+  .description {
+    text-align: center;
+    padding-left: 0;
+  }
+
+  .description::before {
+    display: none;
+  }
+
+  .meta {
+    justify-content: center;
+  }
 }
