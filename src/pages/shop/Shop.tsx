@@ -12,21 +12,21 @@ const Shop: React.FC = () => {
   }, [fetchFilteredProducts]);
 
   return (
-    <>
+    <div className={styles.shopPage}>
       <div className={styles.filterSideBar}>
         <FilterSideBar />
       </div>
       <div className={styles.shopContainer}>
         <div className={styles.shopContent}>
           <TopBar />
-          <div className={styles.productsRow}>
+          <div className={styles.productsGrid}>
             {products.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 export default Shop;

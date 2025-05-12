@@ -5,6 +5,7 @@ import { useFavoriteStore } from "@/stores/favoriteStore";
 import { useLoginStore } from "@/stores/loginStore";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Heart, ShoppingCart } from "lucide-react";
 
 interface ProductCardProps {
   product: Product;
@@ -45,45 +46,42 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   };
 
   return (
-    <div className={styles.col12}>
-      <div className={styles.productCard}>
-        <div className={styles.productImage}>
-          <Link to={`/product/${product.id}`}>
-            <img src={product.imageUrl} alt={product.name} width={444} />
-          </Link>
+    <div className={styles.productCard}>
+      <div className={styles.productImageContainer}>
+        <Link to={`/product/${product.id}`} className={styles.productImageLink}>
+          <img
+            src={product.imageUrl}
+            alt={product.name}
+            className={styles.productImage}
+          />
+        </Link>
+        <div className={styles.productActions}>
+          <button
+            className={`${styles.actionButton} ${styles.favoriteButton}`}
+            onClick={toggleFavorite}
+            disabled={!isLoggedIn}
+            title={isLoggedIn ? "Add to Favorites" : "Log in to add favorite"}
+          >
+            <Heart
+              className={styles.actionIcon}
+              fill={isFavorite ? "currentColor" : "none"}
+              strokeWidth={isFavorite ? 0 : 1.5}
+            />
+          </button>
+          <button
+            className={`${styles.actionButton} ${styles.cartButton}`}
+            onClick={handleAddToCart}
+            title="Add to Cart"
+          >
+            <ShoppingCart className={styles.actionIcon} />
+          </button>
         </div>
+      </div>
 
-        <div className={styles.productDescription}>
-          <div className={styles.productMetadata}>
-            <span className={styles.line}></span>
-            <div>
-              <p className={styles.price}>${product.price.toFixed(2)}</p>
-              <h6 className={styles.name}>{product.name}</h6>
-            </div>
-          </div>
-          <div className={styles.actionsWrapper}>
-            <div className={styles.favWrapper}>
-              {isLoggedIn ? (
-                <span className={styles.favorite} onClick={toggleFavorite}>
-                  {isFavorite ? "★" : "☆"}
-                </span>
-              ) : (
-                <span
-                  className={styles.favorite}
-                  title="Log in to add favorite"
-                >
-                  ☆
-                </span>
-              )}
-              <span className={styles.favTooltip}>Add to Favorites</span>
-            </div>
-            <div className={styles.basketWrapper}>
-              <span className={styles.basket} onClick={handleAddToCart}>
-                🛒
-              </span>
-              <span className={styles.basketTooltip}>Add to Cart</span>
-            </div>
-          </div>
+      <div className={styles.productDetails}>
+        <div className={styles.productInfo}>
+          <h3 className={styles.productName}>{product.name}</h3>
+          <p className={styles.productPrice}>${product.price.toFixed(2)}</p>
         </div>
       </div>
     </div>

@@ -1,53 +1,62 @@
-/* Sidebar filter */
+/* Shop Page Layout */
+.shopPage {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
 .filterSideBar {
-  background-color: #f5f7fa;
-  max-width: 14.375rem;
-  flex: 1;
-  padding: 6.25rem 2.5rem;
+  width: 250px;
+  background-color: #f4f4f4;
+  padding: 20px;
+  display: none;
 }
 
-/* Main shop container */
 .shopContainer {
-  flex: 0 0 calc(95% - 34.375rem);
-  width: calc(95% - 34.375rem);
-  max-width: calc(95% - 34.375rem);
-  padding: 6.25rem 0;
+  flex-grow: 1;
+  padding: 20px;
 }
 
-/* Shop content wrapper */
 .shopContent {
   width: 100%;
-  padding-inline: 1rem;
-  margin-inline: auto;
 }
 
-/* Products grid */
-.productsRow {
-  display: flex;
-  flex-wrap: wrap;
-  margin-inline: -15px;
+.productsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
 }
 
-/* Responsive breakpoints */
-@media (max-width: 1200px) {
+/* Tablet and Desktop Styles */
+@media (min-width: 768px) {
   .filterSideBar {
-    max-width: 12rem;
-    padding: 4rem 1.5rem;
+    display: block;
   }
 
-  .shopContainer {
-    flex: 0 0 calc(95% - 24rem);
-    width: calc(95% - 24rem);
-    max-width: calc(95% - 24rem);
+  .productsGrid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
-@media (max-width: 768px) {
-  .filterSideBar,
-  .shopContainer {
-    flex: 0 0 100%;
-    max-width: 100%;
+/* Large Desktop Styles */
+@media (min-width: 1024px) {
+  .productsGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Mobile Styles */
+@media (max-width: 767px) {
+  .shopPage {
+    flex-direction: column;
+  }
+
+  .filterSideBar {
     width: 100%;
-    padding: 2rem 1rem;
+    display: block;
+  }
+
+  .productsGrid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
