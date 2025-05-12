@@ -20,8 +20,11 @@ const CategoriesGrid: React.FC = () => {
   return (
     <div className={styles.gridContainer}>
       {randomProducts.map((product) => (
-        <Link to={`/category/${product.categoryName.toLowerCase()}`}>
-          <div key={product.id} className={styles.productCard}>
+        <Link
+          key={product.id}
+          to={`/category/${product.categoryName.toLowerCase()}`}
+        >
+          <div className={styles.productCard}>
             <div className={styles.productImageContainer}>
               <img
                 className={styles.productImage}
