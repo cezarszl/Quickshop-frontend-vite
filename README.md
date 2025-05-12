@@ -1,25 +1,55 @@
-# QuickShop Frontend (In Preparation)
+# QuickShop Frontend
 
-Welcome to the **QuickShop** frontend repository! This project is currently under development. The goal is to build the frontend for the previously created QuickShop API, providing a seamless e-commerce experience.
+Welcome to the **QuickShop** frontend repository – a modern e-commerce frontend built with React and Vite. It integrates with the [QuickShop API](https://github.com/cezarszl/QuickShopAPI) to provide a full shopping experience including browsing products, managing a cart, secure checkout with Stripe, and user authentication.
 
-You can follow the progress of this project and track the features being worked on via our [Trello board](https://trello.com/invite/b/66ead570aa27e521bc7aaba9/ATTIb20477a065a154a10f30828e57926106FFDD6F73/quickshop-frontend).
+## 🌐 Live Demo
 
-## Demo
+🛍️ [**Visit QuickShop**](https://quickshop-frontend-vite.vercel.app/)
 
-A demo of the project is available at [**QuickShop Frontend**](https://quickshop-frontend-vite.vercel.app//).
+## ⚙️ Features
 
+- 🛒 View products, categories, brands, and colors
+- 🔍 Filter and sort products
+- ❤️ Add and manage favorite products
+- 🧾 Checkout with Stripe (test mode)
+- ✅ Orders stored after successful payment
+- 👤 User registration and login (standard + Google OAuth)
+- 🧺 Persistent cart for guests and users
+- 🔐 JWT-based protected routes
+- 📄 My Orders page to view order history
 
-## Tech Stack
+## 🧪 Test Card (Stripe)
 
-- **React** - A JavaScript library for building user interfaces.
-- **Vite** - A fast build tool that provides a great development experience.
-- **CSS Modules** - Scoped and modular CSS styling.
-- **Zustand** - Lightweight state management library for React.
-- **Axios** - Promise-based HTTP client for handling API requests.
-- **Stripe** - Planned integration for payment processing.
+Use the following test card for Stripe payments:
 
-## Backend API
+Card Number: 4242 4242 4242 4242
+Expiry Date: Any future date
+CVC: Any 3 digits
+Zip: Any 5 digits
 
-This frontend will interact with the [**QuickShop API**](https://github.com/cezarszl/QuickShopAPI).
+## 🧰 Tech Stack
 
+- **React** – UI Library  
+- **Vite** – Lightning-fast development environment  
+- **Zustand** – State management  
+- **Axios** – API requests  
+- **Stripe** – Payment processing  
+- **Google Auth** – OAuth login support  
+- **React Router** – Client-side routing  
+- **CSS Modules** – Scoped styling  
+- **Zod + React Hook Form** – Validated forms
 
+## 📦 Backend API
+
+This project connects to the [QuickShop API](https://github.com/cezarszl/QuickShopAPI) – a RESTful backend built with NestJS and PostgreSQL, featuring:
+
+- Product management  
+- Cart management (anonymous and user-based)  
+- Stripe checkout session generation  
+- Order creation  
+- Favorite products  
+- Authentication with JWT and Google OAuth
+
+---
+
+> 🚧 The project is still evolving, and future improvements include better error handling, full mobile responsiveness, and admin-level tools.
