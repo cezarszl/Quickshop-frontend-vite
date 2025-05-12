@@ -22,10 +22,12 @@ Welcome to the **QuickShop** frontend repository – a modern e-commerce fronten
 
 Use the following test card for Stripe payments:
 
+```
 Card Number: 4242 4242 4242 4242
-Expiry Date: Any future date
-CVC: Any 3 digits
-Zip: Any 5 digits
+Expiry Date: 12/34
+CVC: 123
+ZIP: 12345
+```
 
 ## 🧰 Tech Stack
 
