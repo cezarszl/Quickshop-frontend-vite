@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useSearchStore } from "@/stores/searchStore";
 import styles from "./search.module.css";
+import { Search } from "lucide-react";
 
 const SearchPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -30,66 +31,117 @@ const SearchPage: React.FC = () => {
     }
   };
 
+  // Renderowanie pustych stanów w spójnym stylu z Cart i Favorites
+  const renderEmptyState = () => {
+    if (loading) {
+      return (
+        <div className={styles.messageCard}>
+          <div className={styles.emptyState}>
+            <div className={styles.loadingSpinner}></div>
+            <p>Searching for products...</p>
+          </div>
+        </div>
+      );
+    }
+
+    if (error) {
+      return (
+        <div className={styles.messageCard}>
+          <div className={styles.emptyState}>
+            <Search className={styles.emptyIcon} />
+            <p>{error}</p>
+          </div>
+        </div>
+      );
+    }
+
+    if (query && results.length === 0) {
+      return (
+        <div className={styles.messageCard}>
+          <div className={styles.emptyState}>
+            <Search className={styles.emptyIcon} />
+            <p>No products found for "{query}"</p>
+            <button
+              onClick={() => {
+                setInput("");
+                setQuery("");
+                setSearchParams({});
+                useSearchStore.setState({ results: [], error: null });
+              }}
+              className={styles.primaryButton}
+            >
+              Clear Search
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    if (!query) {
+      return (
+        <div className={styles.messageCard}>
+          <div className={styles.emptyState}>
+            <Search className={styles.emptyIcon} />
+            <p>Start typing to search for products</p>
+          </div>
+        </div>
+      );
+    }
+
+    return null;
+  };
+
   return (
-    <div className={styles.searchContainer}>
-      <form onSubmit={handleSubmit} className={styles.searchForm}>
-        <input
-          type="text"
-          placeholder="Search for products..."
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          className={styles.searchInput}
-        />
-      </form>
+    <div className={styles.page}>
+      <div className={styles.container}>
+        <h2 className={styles.title}>Search Products</h2>
 
-      {loading && (
-        <div className={styles.message}>
-          <h2>Loading...</h2>
-        </div>
-      )}
-      {error && (
-        <div className={styles.message}>
-          <h2>{error}</h2>
-        </div>
-      )}
-      {!loading && results.length === 0 && (
-        <div className={styles.message}>
-          <h2>No products found.</h2>
-        </div>
-      )}
+        <form onSubmit={handleSubmit} className={styles.searchForm}>
+          <div className={styles.searchInputWrapper}>
+            <input
+              type="text"
+              placeholder="Search for products..."
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              className={styles.searchInput}
+            />
+            <button type="submit" className={styles.searchButton}>
+              <Search size={20} />
+            </button>
+          </div>
+        </form>
 
-      {results.length > 0 && (
-        <div className={styles.resultsWrapper}>
-          <table className={styles.resultsTable}>
-            <thead>
-              <tr>
-                <th></th>
-                <th>Name</th>
-                <th>Price</th>
-              </tr>
-            </thead>
-            <tbody>
+        {results.length === 0 ? (
+          renderEmptyState()
+        ) : (
+          <div className={styles.resultsContainer}>
+            <p className={styles.resultsCount}>
+              Found {results.length} product{results.length !== 1 ? "s" : ""}
+            </p>
+            <div className={styles.resultsGrid}>
               {results.map((product) => (
-                <tr key={product.id}>
-                  <td className={styles.imageCell}>
-                    <a href={`/product/${product.id}`}>
-                      <img src={product.imageUrl} alt={product.name} />
-                    </a>
-                  </td>
-                  <td className={styles.nameCell}>
-                    <a href={`/product/${product.id}`}>
-                      <h5>{product.name}</h5>
-                    </a>
-                  </td>
-                  <td className={styles.priceCell}>
-                    <span>${product.price}</span>
-                  </td>
-                </tr>
+                <a
+                  href={`/product/${product.id}`}
+                  key={product.id}
+                  className={styles.productCard}
+                >
+                  <div className={styles.productImageContainer}>
+                    <img
+                      src={product.imageUrl}
+                      alt={product.name}
+                      className={styles.productImage}
+                    />
+                  </div>
+                  <div className={styles.productInfo}>
+                    <h3 className={styles.productName}>{product.name}</h3>
+                    <p className={styles.productPrice}>${product.price}</p>
+                  </div>
+                </a>
               ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
