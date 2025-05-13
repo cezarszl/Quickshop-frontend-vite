@@ -9,7 +9,6 @@
   position: sticky;
   top: 0;
   left: 0;
-  overflow-y: auto; 
 }
 
 .sidebarHeader {
@@ -96,6 +95,8 @@
     width: 280px;
     min-width: 280px;
     z-index: 9998;
+    overflow-y: auto; 
+    overscroll-behavior: contain;
   }
   
   .sidebarContainer.open {
