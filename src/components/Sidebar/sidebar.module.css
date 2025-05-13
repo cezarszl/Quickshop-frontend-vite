@@ -1,7 +1,7 @@
 .sidebarContainer {
   width: 320px;
   min-width: 320px;
-  height: 100vh;
+  height: auto;
   background-color: white;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
   display: flex;
@@ -102,7 +102,6 @@
     width: 280px;
     min-width: 280px;
     z-index: 9998;
-    overflow-y: auto;
   }
   
   .sidebarContainer.open {
