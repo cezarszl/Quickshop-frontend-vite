@@ -113,8 +113,7 @@
 }
 
 /* Product columns */
-.cartProductImage {
-}
+
 .cartProductName a {
   text-decoration: none;
 }
@@ -308,7 +307,7 @@
 
 @media (max-width: 360px) {
   .table td:first-child,
-.table th:first-child {
-  width: 0%;
-}
+  .table th:first-child {
+      width: 0%;
+  }
 }
