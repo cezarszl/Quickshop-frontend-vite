@@ -58,9 +58,16 @@
   transition: all 0.2s ease;
 }
 
+
 .newThisWeekButton:hover {
   background-color: #222;
   transform: translateY(-1px);
+}
+
+.promoLink {
+  display: block;
+  text-decoration: none;
+  width: 100%;
 }
 
 .sidebarFooter {
