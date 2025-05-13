@@ -114,7 +114,6 @@
 
 /* Product columns */
 .cartProductImage {
-  width: 25%;
 }
 .cartProductName a {
   text-decoration: none;
@@ -183,7 +182,7 @@
 
 .table td:nth-child(2),
 .table th:nth-child(2) {
-  width: 40%;
+  width: 20%;
 }
 
 .table td:nth-child(3),
@@ -245,14 +244,8 @@
 }
 
 /* Responsive Adjustments */
-@media (max-width: 1024px) {
-  .cartTableArea {
-    padding-right: 2rem;
-    padding-left: 2rem;
-  }
-}
 
-@media (max-width: 1055px) {
+@media (max-width: 1200px) {
 
   .cartTable {
     overflow-x: auto;
