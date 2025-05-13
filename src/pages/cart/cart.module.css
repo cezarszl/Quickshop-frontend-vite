@@ -304,3 +304,11 @@
     font-size: 0.9rem;
   }
 }
+
+
+@media (max-width: 360px) {
+  .table td:first-child,
+.table th:first-child {
+  width: 0%;
+}
+}
