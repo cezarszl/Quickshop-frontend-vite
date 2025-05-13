@@ -3,6 +3,7 @@ import { useOrderStore } from "@/stores/orderStore";
 import { useLoginStore } from "@/stores/loginStore";
 import styles from "./myOrders.module.css";
 import { Link } from "react-router-dom";
+import NotLoggedIn from "../favorites/notloggedin/NotLoggedIn";
 
 const MyOrders: React.FC = () => {
   const { orders, fetchUserOrders } = useOrderStore();
@@ -15,35 +16,7 @@ const MyOrders: React.FC = () => {
   }, [user, fetchUserOrders]);
 
   if (!user) {
-    return (
-      <div className={styles.page}>
-        <div className={styles.container}>
-          <div className={styles.messageCard}>
-            <h2 className={styles.title}>My Orders</h2>
-            <div className={styles.emptyState}>
-              <svg
-                className={styles.emptyIcon}
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <circle cx="12" cy="12" r="10"></circle>
-                <path d="M16 16s-1.5-2-4-2-4 2-4 2"></path>
-                <line x1="9" y1="9" x2="9.01" y2="9"></line>
-                <line x1="15" y1="9" x2="15.01" y2="9"></line>
-              </svg>
-              <p>You need to be logged in to view your orders.</p>
-              <Link to="/login" className={styles.primaryButton}>
-                Log In
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+    return <NotLoggedIn />;
   }
 
   if (orders.length === 0) {
