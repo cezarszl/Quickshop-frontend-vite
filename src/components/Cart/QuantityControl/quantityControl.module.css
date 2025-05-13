@@ -55,3 +55,10 @@
   appearance: none;
   margin: 0;
 }
+
+/* Media queries for mobile responsiveness */
+@media screen and (max-width: 768px) {
+  .quantityControl p {
+    display: none; 
+  }
+}
