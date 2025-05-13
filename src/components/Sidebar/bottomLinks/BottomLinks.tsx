@@ -1,30 +1,31 @@
+import { Link } from "react-router-dom";
 import { useFavoriteStore } from "@/stores/favoriteStore";
-import styles from "./bottomLinks.module.css";
 import { useCartStore } from "@/stores/cartStore";
-
-interface BottomLink {
-  icon: string;
-  name: string;
-  href: string;
-}
+import { ShoppingCart, Heart, Search } from "lucide-react";
+import styles from "./bottomLinks.module.css";
 
 const BottomLinks: React.FC = () => {
   const { totalQuantity } = useCartStore();
   const totalFavQuantity = useFavoriteStore((state) => state.totalFavQuantity);
 
-  const bottomLinks: BottomLink[] = [
+  const bottomLinks = [
     {
-      icon: "🛒",
-      name: `CART (${totalQuantity})`,
+      icon: <ShoppingCart size={18} />,
+      name: `Cart`,
+      count: totalQuantity,
       href: "/cart",
     },
     {
-      icon: "💛",
-      name: `WISHLIST (${totalFavQuantity})`,
+      icon: <Heart size={18} />,
+      name: `Wishlist`,
+      count: totalFavQuantity,
       href: "/wishlist",
     },
-
-    { icon: "🔍", name: "SEARCH", href: "/search" },
+    {
+      icon: <Search size={18} />,
+      name: "Search",
+      href: "/search",
+    },
   ];
 
   return (
@@ -32,10 +33,13 @@ const BottomLinks: React.FC = () => {
       <ul className={styles.bottomLinksList}>
         {bottomLinks.map((link) => (
           <li key={link.name} className={styles.bottomLinksItem}>
-            <span className={styles.bottomLinksIcon}>{link.icon}</span>
-            <a href={link.href} className={styles.bottomLinksLink}>
-              {link.name}
-            </a>
+            <Link to={link.href} className={styles.bottomLinksLink}>
+              <span className={styles.bottomLinksIcon}>{link.icon}</span>
+              <span className={styles.bottomLinksText}>{link.name}</span>
+              {link.count !== undefined && (
+                <span className={styles.bottomLinksCount}>{link.count}</span>
+              )}
+            </Link>
           </li>
         ))}
       </ul>
