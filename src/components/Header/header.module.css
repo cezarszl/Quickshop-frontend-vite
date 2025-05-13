@@ -7,28 +7,35 @@
   align-items: center;
   justify-content: flex-end;
   padding: 0 2rem;
-  z-index: 999;
+  z-index: 9997;
+}
+
+.searchContainer {
+  flex: 1;
+  max-width: 600px;
+  margin-right: 2rem;
 }
 
 .navList {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    gap: 2rem;
-    margin-right: 8rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 2rem;
 }
 
 .navItem {
-    display: flex;
-    position: relative;
+  display: flex;
+  position: relative;
 }
+
 .navLink {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-decoration: none;
   color: white;
+  cursor: pointer;
 }
 
 .iconWrapper {
@@ -38,34 +45,78 @@
   margin-bottom: 0.25rem;
   position: relative;
 }
+
 .checkCircle, .greyCircle, .redCircle {
-    position: absolute; 
-    bottom: -2px;
-    right: -8px; 
-    color: white;
-    width: 18px; 
-    height: 18px; 
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px; 
+  position: absolute; 
+  bottom: -2px;
+  right: -8px; 
+  color: white;
+  width: 18px; 
+  height: 18px; 
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px; 
 }
+
 .checkCircle {
-    background-color:green; 
+  background-color: green; 
 }
+
 .greyCircle {
-    background-color:grey; 
+  background-color: grey; 
 }
+
 .redCircle {
-    background-color: red; 
+  background-color: red; 
 }
 
 .icon {
-    color: white;
-    font-size: 2rem;
+  color: white;
+  font-size: 2rem;
 }
+
 .label {
-  font-size: 0.75rem; /* możesz dostosować rozmiar tekstu */
+  font-size: 0.75rem;
   text-align: center;
+}
+
+/* Media queries for mobile responsiveness */
+@media screen and (max-width: 768px) {
+  .header {
+    padding: 0 1rem;
+  }
+  
+  .searchContainer {
+    display: none; /* Hide search on mobile */
+  }
+  
+  .navList {
+    gap: 1.5rem;
+    margin-right: 0;
+  }
+  
+  .icon {
+    font-size: 1.75rem; /* Slightly smaller icons on mobile */
+  }
+  
+  .label {
+    font-size: 0.7rem; /* Slightly smaller text on mobile */
+  }
+}
+
+/* For very small screens */
+@media screen and (max-width: 375px) {
+  .navList {
+    gap: 1rem;
+  }
+  
+  .icon {
+    font-size: 1.5rem;
+  }
+  
+  .label {
+    display: none; /* Hide labels on very small screens */
+  }
 }

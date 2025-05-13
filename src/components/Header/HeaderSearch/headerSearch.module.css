@@ -1,7 +1,8 @@
 .searchWrapper {
    position: absolute;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
+  top: 50%;
   width: 500px;
   font-family: 'Inter', sans-serif;
 }
@@ -40,7 +41,6 @@
   border-radius: 16px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  z-index: 100;
   overflow: hidden;
   animation: fadeIn 0.25s ease;
 }
@@ -82,3 +82,4 @@
   font-weight: 400;
   letter-spacing: 0.3px;
 }
+

@@ -31,7 +31,9 @@ const Header: React.FC = () => {
 
   return (
     <header className={styles.header}>
-      <HeaderSearch />
+      <div className={styles.searchContainer}>
+        <HeaderSearch />
+      </div>
       <nav aria-label="Header navigation">
         <ul className={styles.navList}>
           <li className={styles.navItem}>
