@@ -57,7 +57,7 @@
 }
 
 /* Media queries for mobile responsiveness */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 960px) {
   .quantityControl p {
     display: none; 
   }
