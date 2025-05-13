@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import styles from "./favorites.module.css";
-import { FaStar, FaTrash } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa";
 import { useFavoriteStore } from "@/stores/favoriteStore";
 import { useLoginStore } from "@/stores/loginStore";
 import { Link } from "react-router-dom";
 import NotLoggedIn from "./notloggedin/NotLoggedIn";
+import { Star } from "lucide-react";
 
 const Favorites: React.FC = () => {
   const { favorites, fetchFavorites, removeFavorite } = useFavoriteStore();
@@ -20,9 +21,19 @@ const Favorites: React.FC = () => {
 
   if (favorites.length === 0) {
     return (
-      <div className={styles.emptyFavorites}>
-        <FaStar className={styles.starIcon} />
-        <h2>You have no favorites.</h2>
+      <div className={styles.page}>
+        <div className={styles.container}>
+          <div className={styles.messageCard}>
+            <h2 className={styles.title}>My Favorites</h2>
+            <div className={styles.emptyState}>
+              <Star className={styles.emptyIcon} size={60} />
+              <p>Your favorites list is currently empty.</p>
+              <Link to="/shop" className={styles.primaryButton}>
+                Explore Products
+              </Link>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
