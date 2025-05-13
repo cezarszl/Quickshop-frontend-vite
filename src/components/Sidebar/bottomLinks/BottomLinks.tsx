@@ -19,9 +19,9 @@ const BottomLinks: React.FC = () => {
       href: "/cart",
     },
     {
-      icon: "⭐",
-      name: `FAVORITES (${totalFavQuantity})`,
-      href: "/favorites",
+      icon: "💛",
+      name: `WISHLIST (${totalFavQuantity})`,
+      href: "/wishlist",
     },
 
     { icon: "🔍", name: "SEARCH", href: "/search" },

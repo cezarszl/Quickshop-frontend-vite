@@ -28,7 +28,7 @@ const AppRoutes: React.FC = () => {
       <Route path="/auth/google/callback" element={<GoogleCallback />} />
       <Route path="/myprofile" element={<MyProfile />} />
       <Route path="/myorders" element={<MyOrders />} />
-      <Route path="/favorites" element={<Favorites />} />
+      <Route path="/wishlist" element={<Favorites />} />
       <Route path="/search" element={<Search />} />
       <Route path="/category/:categoryName" element={<Category />} />
       <Route path="*" element={<NotFound />} />

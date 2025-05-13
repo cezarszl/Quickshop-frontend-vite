@@ -53,23 +53,6 @@ const Header: React.FC = () => {
             </span>
             {isAccountMenuOpen && <AccountMenu />}
           </li>
-
-          <li className={styles.navItem}>
-            <a
-              href="/favorites"
-              className={styles.navLink}
-              aria-label="Favorites"
-            >
-              <div className={styles.iconWrapper}>
-                <FaRegStar className={styles.icon} />
-                {totalFavQuantity !== 0 && (
-                  <div className={styles.greyCircle}>{totalFavQuantity}</div>
-                )}
-              </div>
-              <span className={styles.label}>Favorites</span>
-            </a>
-          </li>
-
           <li className={styles.navItem}>
             <a
               href="/cart"
