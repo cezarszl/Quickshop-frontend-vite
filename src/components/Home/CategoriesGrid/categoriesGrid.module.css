@@ -1,3 +1,12 @@
+.pageContainer {
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
 .gridContainer {
   display: grid;
   grid-template-columns: repeat(3, 1fr);  
@@ -41,4 +50,30 @@
 .productPrice {
   font-size: 16px;
   line-height: 1; 
+}
+
+/* Responsive styles - only adjust for tablet and mobile */
+@media screen and (max-width: 1024px) {
+  .pageContainer {
+    height: auto; /* Remove fixed height on smaller screens */
+  }
+  
+  .gridContainer {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto; /* Let rows adjust based on content */
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .gridContainer {
+    grid-template-columns: 1fr;
+  }
+  
+  .productInfo {
+    padding: 0.75rem;
+  }
+  
+  .productCategory {
+    font-size: 1.2rem;
+  }
 }
