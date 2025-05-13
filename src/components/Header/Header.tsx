@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./header.module.css";
 import { FaCheck, FaUser } from "react-icons/fa6";
-import { FaRegStar } from "react-icons/fa6";
 import { FaBagShopping } from "react-icons/fa6";
 import { useCartStore } from "@/stores/cartStore";
 import AccountMenu from "./AccountMenu/AccountMenu";
@@ -51,7 +50,9 @@ const Header: React.FC = () => {
               </div>
               <span className={styles.label}>Profile</span>
             </span>
-            {isAccountMenuOpen && <AccountMenu />}
+            {isAccountMenuOpen && (
+              <AccountMenu totalFavQuantity={totalFavQuantity} />
+            )}
           </li>
           <li className={styles.navItem}>
             <a
