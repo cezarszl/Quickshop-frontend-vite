@@ -10,7 +10,7 @@
 .searchInput {
   width: 100%;
   padding: 14px 20px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid white;
   border-radius: 16px;
   background-color: rgba(30, 30, 34, 0.6);
   backdrop-filter: blur(10px);
@@ -22,7 +22,7 @@
 
 .searchInput:focus {
   outline: none;
-  border-color: rgba(79, 70, 229, 0.5);
+  border-color: white;
   box-shadow: 0 6px 16px rgba(79, 70, 229, 0.2);
 }
 
