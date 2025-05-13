@@ -95,8 +95,6 @@
     width: 280px;
     min-width: 280px;
     z-index: 9998;
-    overflow-y: auto; 
-    overscroll-behavior: contain;
   }
   
   .sidebarContainer.open {
@@ -106,5 +104,12 @@
   .mobileToggle {
     display: flex;
     z-index: 9999;
+  }
+}
+
+/* For very small screens */
+@media screen and (max-width: 375px) {
+  .navbarContainer {
+    max-height: 300px;
   }
 }
