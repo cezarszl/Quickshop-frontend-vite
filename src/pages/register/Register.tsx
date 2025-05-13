@@ -5,7 +5,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useLoginStore } from "@/stores/loginStore";
 import { useNavigate } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc"; // ikona Google
+import { FcGoogle } from "react-icons/fc";
 import styles from "./register.module.css";
 import axios from "axios";
 
@@ -19,6 +19,8 @@ type RegisterFormData = z.infer<typeof registerSchema>;
 
 const Register: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
+
   const registerUser = useLoginStore((state) => state.register);
   const loginWithGoogle = useLoginStore((state) => state.loginWithGoogle);
   const error = useLoginStore((state) => state.error);
@@ -36,6 +38,7 @@ const Register: React.FC = () => {
       email: "",
       password: "",
     },
+    mode: "onChange", // Enable real-time validation
   });
 
   const onSubmit = async (data: RegisterFormData) => {
@@ -57,57 +60,118 @@ const Register: React.FC = () => {
     }
   };
 
+  const handleGoogleLogin = async () => {
+    setGoogleLoading(true);
+    try {
+      await loginWithGoogle();
+    } catch (err) {
+      console.error("Google login error:", err);
+    } finally {
+      setGoogleLoading(false);
+    }
+  };
+
   return (
     <div className={styles.registerContainer}>
-      <h2>Register</h2>
-      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <input
-          type="text"
-          placeholder="Name"
-          className={styles.input}
-          {...register("name")}
-        />
-        {errors.name && (
-          <p className={styles.errorMessage}>{errors.name.message}</p>
-        )}
+      <div className={styles.registerCard}>
+        <h2 className={styles.registerTitle}>Create Account</h2>
+        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+          <div className={styles.inputWrapper}>
+            <input
+              type="text"
+              placeholder="Name"
+              className={`${styles.input} ${
+                errors.name ? styles.inputError : ""
+              }`}
+              {...register("name")}
+              disabled={isLoading || googleLoading}
+            />
+            {errors.name && (
+              <p className={styles.errorMessage}>{errors.name.message}</p>
+            )}
+          </div>
 
-        <input
-          type="email"
-          placeholder="Email"
-          className={styles.input}
-          autoComplete="off"
-          {...register("email")}
-        />
-        {errors.email && (
-          <p className={styles.errorMessage}>{errors.email.message}</p>
-        )}
+          <div className={styles.inputWrapper}>
+            <input
+              type="email"
+              placeholder="Email"
+              className={`${styles.input} ${
+                errors.email ? styles.inputError : ""
+              }`}
+              autoComplete="off"
+              {...register("email")}
+              disabled={isLoading || googleLoading}
+            />
+            {errors.email && (
+              <p className={styles.errorMessage}>{errors.email.message}</p>
+            )}
+          </div>
 
-        <input
-          type="password"
-          placeholder="Password"
-          autoComplete="off"
-          className={styles.input}
-          {...register("password")}
-        />
-        {errors.password && (
-          <p className={styles.errorMessage}>{errors.password.message}</p>
-        )}
+          <div className={styles.inputWrapper}>
+            <input
+              type="password"
+              placeholder="Password"
+              autoComplete="off"
+              className={`${styles.input} ${
+                errors.password ? styles.inputError : ""
+              }`}
+              {...register("password")}
+              disabled={isLoading || googleLoading}
+            />
+            {errors.password && (
+              <p className={styles.errorMessage}>{errors.password.message}</p>
+            )}
+          </div>
 
-        {error && <p className={styles.errorMessage}>{error}</p>}
+          {error && <p className={styles.formError}>{error}</p>}
 
-        <button
-          type="submit"
-          className={styles.submitButton}
-          disabled={isLoading}
-        >
-          {isLoading ? "Registering..." : "Register"}
-        </button>
-      </form>
-      <div className={styles.Google}>
-        <button onClick={loginWithGoogle} className={styles.googleButton}>
-          <FcGoogle className={styles.googleIcon} />
-          Continue with Google
-        </button>
+          <button
+            type="submit"
+            className={styles.submitButton}
+            disabled={isLoading || googleLoading}
+          >
+            {isLoading ? (
+              <span className={styles.buttonLoader}>
+                <span className={styles.loaderDot}></span>
+                <span className={styles.loaderDot}></span>
+                <span className={styles.loaderDot}></span>
+              </span>
+            ) : (
+              "Register"
+            )}
+          </button>
+        </form>
+
+        <div className={styles.divider}>
+          <span>OR</span>
+        </div>
+
+        <div className={styles.googleContainer}>
+          <button
+            onClick={handleGoogleLogin}
+            className={styles.googleButton}
+            disabled={isLoading || googleLoading}
+          >
+            {googleLoading ? (
+              <span className={styles.buttonLoader}>
+                <span className={styles.loaderDot}></span>
+                <span className={styles.loaderDot}></span>
+                <span className={styles.loaderDot}></span>
+              </span>
+            ) : (
+              <>
+                <FcGoogle className={styles.googleIcon} />
+                Continue with Google
+              </>
+            )}
+          </button>
+        </div>
+
+        <div className={styles.loginLink}>
+          <p>
+            Already have an account? <a href="/login">Log in</a>
+          </p>
+        </div>
       </div>
     </div>
   );
