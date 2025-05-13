@@ -18,6 +18,7 @@ type LoginFormData = z.infer<typeof loginSchema>;
 
 const LoginPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
 
   const login = useLoginStore((state) => state.login);
   const loginWithGoogle = useLoginStore((state) => state.loginWithGoogle);
@@ -29,13 +30,14 @@ const LoginPage: React.FC = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
       email: "",
       password: "",
     },
+    mode: "onChange", // Enable real-time validation
   });
 
   const onSubmit = async (data: LoginFormData) => {
@@ -56,6 +58,22 @@ const LoginPage: React.FC = () => {
     }
   };
 
+  const handleGoogleLogin = async () => {
+    setGoogleLoading(true);
+    try {
+      await loginWithGoogle();
+
+      const user = useLoginStore.getState().user;
+      if (user?.id) {
+        await syncAfterLogin(user.id);
+      }
+    } catch (err) {
+      console.error("Google login error:", err);
+    } finally {
+      setGoogleLoading(false);
+    }
+  };
+
   useEffect(() => {
     if (isLoggedIn) {
       navigate("/");
@@ -64,47 +82,88 @@ const LoginPage: React.FC = () => {
 
   return (
     <div className={styles.loginContainer}>
-      <h2>Login</h2>
-      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <input
-            type="email"
-            placeholder="Email address"
-            className={styles.input}
-            {...register("email")}
-          />
-          {errors.email && (
-            <p className={styles.errorMessage}>{errors.email.message}</p>
-          )}
+      <div className={styles.loginCard}>
+        <h2 className={styles.loginTitle}>Login</h2>
+        <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+          <div className={styles.inputWrapper}>
+            <input
+              type="email"
+              placeholder="Email address"
+              className={`${styles.input} ${
+                errors.email ? styles.inputError : ""
+              }`}
+              {...register("email")}
+              disabled={isLoading || googleLoading}
+            />
+            {errors.email && (
+              <p className={styles.errorMessage}>{errors.email.message}</p>
+            )}
+          </div>
+
+          <div className={styles.inputWrapper}>
+            <input
+              type="password"
+              placeholder="Password"
+              className={`${styles.input} ${
+                errors.password ? styles.inputError : ""
+              }`}
+              {...register("password")}
+              disabled={isLoading || googleLoading}
+            />
+            {errors.password && (
+              <p className={styles.errorMessage}>{errors.password.message}</p>
+            )}
+          </div>
+
+          {error && <p className={styles.formError}>{error}</p>}
+
+          <button
+            type="submit"
+            className={styles.submitButton}
+            disabled={isLoading || googleLoading}
+          >
+            {isLoading ? (
+              <span className={styles.buttonLoader}>
+                <span className={styles.loaderDot}></span>
+                <span className={styles.loaderDot}></span>
+                <span className={styles.loaderDot}></span>
+              </span>
+            ) : (
+              "Log in"
+            )}
+          </button>
+        </form>
+
+        <div className={styles.divider}>
+          <span>OR</span>
         </div>
 
-        <div>
-          <input
-            type="password"
-            placeholder="Password"
-            className={styles.input}
-            {...register("password")}
-          />
-          {errors.password && (
-            <p className={styles.errorMessage}>{errors.password.message}</p>
-          )}
+        <div className={styles.googleContainer}>
+          <button
+            onClick={handleGoogleLogin}
+            className={styles.googleButton}
+            disabled={isLoading || googleLoading}
+          >
+            {googleLoading ? (
+              <span className={styles.buttonLoader}>
+                <span className={styles.loaderDot}></span>
+                <span className={styles.loaderDot}></span>
+                <span className={styles.loaderDot}></span>
+              </span>
+            ) : (
+              <>
+                <FcGoogle className={styles.googleIcon} />
+                Continue with Google
+              </>
+            )}
+          </button>
         </div>
 
-        {error && <p className={styles.errorMessage}>{error}</p>}
-
-        <button
-          type="submit"
-          className={styles.submitButton}
-          disabled={isLoading}
-        >
-          {isLoading ? "Logging in..." : "Log in"}
-        </button>
-      </form>
-      <div className={styles.Google}>
-        <button onClick={loginWithGoogle} className={styles.googleButton}>
-          <FcGoogle className={styles.googleIcon} />
-          Continue with Google
-        </button>
+        <div className={styles.registerLink}>
+          <p>
+            Don't have an account? <a href="/register">Register</a>
+          </p>
+        </div>
       </div>
     </div>
   );

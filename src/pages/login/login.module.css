@@ -4,38 +4,64 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
+  padding: 1rem;
+  background-color: #f9f9f9;
+}
+
+.loginCard {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 450px;
+  padding: 2.5rem 2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.loginCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+}
+
+.loginTitle {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
   text-align: center;
+  color: #333;
 }
 
-.loginContainer h2 {
-  margin: 2rem 0;
-}
-
-.form, .Google {
+.form, .googleContainer {
   width: 100%;
-  max-width: 400px;
-  margin: 0 auto;
 }
 
-.inputGroup {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
+.inputWrapper {
+  position: relative;
+  margin-bottom: 1.5rem;
 }
 
 .input {
   width: 100%;
-  margin-bottom: 16px;
   height: 60px;
-  border: none;
-  border-radius: 0;
+  border: 1px solid #efefef;
+  border-radius: 6px;
   background-color: #f5f7fa;
-  padding: 0 30px;
-  color: #6b6b6b;
+  padding: 0 1.5rem;
+  color: #555;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.input:hover {
+  background-color: #f0f2f5;
+}
+
+.inputError {
+  border-color: #ff5252;
+  background-color: rgba(255, 82, 82, 0.05);
 }
 
 input:-webkit-autofill,
@@ -43,37 +69,38 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 1000px #f5f7fa inset !important;
-  -webkit-text-fill-color: #6b6b6b !important;
+  -webkit-text-fill-color: #555 !important;
   transition: background-color 5000s ease-in-out 0s;
 }
 
 .input:focus {
-  color: #495057;
-  border-color: black;
+  background-color: #fff;
+  border-color: #fbb710;
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  box-shadow: 0 0 0 3px rgba(251, 183, 16, 0.2);
 }
 
-.select {
-  font-family: inherit;
-  font-size: 14px;
-  height: 60px;
-  width: 100%;
-  line-height: 60px;
-  color: #6b6b6b;
-  padding: 12px;
-  border-radius: 0;
-  border: none;
-  background-color: #f5f7fa;
-  margin-bottom: 16px;
+.input:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 
 .errorMessage {
-  color: #dc3545;
-  font-size: 12px;
-  margin-top: -10px;
-  margin-bottom: 16px;
+  color: #ff5252;
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
   text-align: left;
+}
+
+.formError {
+  color: #ff5252;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  padding: 0.75rem;
+  background-color: rgba(255, 82, 82, 0.1);
+  border-radius: 4px;
 }
 
 .submitButton {
@@ -84,17 +111,50 @@ input:-webkit-autofill:active {
   padding: 0 1rem;
   background-color: #fbb710;
   color: #ffffff;
-  font-size: 1.125rem;
+  font-size: 1rem;
+  font-weight: 600;
   text-align: center;
   text-decoration: none;
   border: none;
+  border-radius: 6px;
   transition: all 0.3s ease;
-  line-height: 55px;
+  cursor: pointer;
+  position: relative;
+}
+
+.submitButton:hover:not(:disabled) {
+  background-color: #e9a800;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(251, 183, 16, 0.3);
+}
+
+.submitButton:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 .submitButton:disabled {
-  background-color: #6c757d;
+  background-color: #ddd;
   cursor: not-allowed;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 1.5rem 0;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.divider span {
+  padding: 0 1rem;
+  color: #999;
+  font-size: 0.875rem;
 }
 
 .googleButton {
@@ -106,21 +166,109 @@ input:-webkit-autofill:active {
   min-height: 3.5rem;
   font-family: inherit;
   padding: 0 1rem;
-  margin-top: 16px;
   background-color: #ffffff;
   color: #333;
-  font-size: 1.125rem;
+  font-size: 1rem;
+  font-weight: 500;
   text-align: center;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
   transition: all 0.3s ease;
   cursor: pointer;
+  position: relative;
 }
 
-.googleButton:hover {
+.googleButton:hover:not(:disabled) {
   background-color: #f5f5f5;
+  border-color: #ccc;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.googleButton:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.googleButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 
 .googleIcon {
   font-size: 1.5rem;
+}
+
+.registerLink {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.registerLink a {
+  color: #fbb710;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.registerLink a:hover {
+  color: #e9a800;
+  text-decoration: underline;
+}
+
+/* Loading animation */
+.buttonLoader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.loaderDot {
+  width: 6px;
+  height: 6px;
+  background-color: white;
+  border-radius: 50%;
+  display: inline-block;
+  animation: pulse 1.4s infinite ease-in-out;
+}
+
+.loaderDot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.loaderDot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loaderDot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes pulse {
+  0%, 80%, 100% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 576px) {
+  .loginCard {
+    padding: 2rem 1.5rem;
+  }
+  
+  .loginTitle {
+    font-size: 1.5rem;
+  }
+  
+  .input {
+    height: 55px;
+    font-size: 15px;
+  }
 }
