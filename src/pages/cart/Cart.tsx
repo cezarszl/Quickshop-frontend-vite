@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { useCartStore } from "@/stores/cartStore";
 import styles from "./cart.module.css";
 import QuantityControl from "@/components/Cart/QuantityControl/QuantityControl";
-import { FaShoppingBag } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { ShoppingCart } from "lucide-react";
 
 const CartPage: React.FC = () => {
   const { cartItems, fetchCart, getCartTotal, cartId } = useCartStore();
@@ -16,9 +16,19 @@ const CartPage: React.FC = () => {
 
   if (cartItems.length === 0) {
     return (
-      <div className={styles.emptyCart}>
-        <FaShoppingBag className={styles.bagIcon} />
-        <h2>Your cart is empty.</h2>
+      <div className={styles.page}>
+        <div className={styles.container}>
+          <div className={styles.messageCard}>
+            <h2 className={styles.title}>Shopping Cart</h2>
+            <div className={styles.emptyState}>
+              <ShoppingCart className={styles.emptyIcon} size={60} />
+              <p>Your shopping cart is currently empty.</p>
+              <Link to="/shop" className={styles.primaryButton}>
+                Continue Shopping
+              </Link>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
