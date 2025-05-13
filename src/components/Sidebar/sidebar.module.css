@@ -9,7 +9,6 @@
   position: sticky;
   top: 0;
   left: 0;
-  z-index: 9998;
 }
 
 .sidebarHeader {
@@ -80,7 +79,8 @@
   top: 1rem;
   left: 1rem;
   z-index: 200;
-  background-color: white;
+  color:white;
+  background-color: black;
   border: none;
   border-radius: 50%;
   width: 40px;
@@ -99,6 +99,7 @@
     transition: transform 0.3s ease;
     width: 280px;
     min-width: 280px;
+    z-index: 9998;
   }
   
   .sidebarContainer.open {
