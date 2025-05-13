@@ -31,7 +31,7 @@
 .navbarContainer {
   flex: 1;
   padding: 1.5rem 0;
-  overflow-y: auto;
+  max-height: 300px;
 }
 
 .buttonContainer {
@@ -95,6 +95,7 @@
     width: 280px;
     min-width: 280px;
     z-index: 9998;
+    overflow-y: auto;
   }
   
   .sidebarContainer.open {
@@ -110,6 +111,6 @@
 /* For very small screens */
 @media screen and (max-width: 375px) {
   .navbarContainer {
-    max-height: 300px;
+    max-height: 280px;
   }
 }
