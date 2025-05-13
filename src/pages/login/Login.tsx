@@ -30,14 +30,14 @@ const LoginPage: React.FC = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
       email: "",
       password: "",
     },
-    mode: "onChange", // Enable real-time validation
+    mode: "onChange",
   });
 
   const onSubmit = async (data: LoginFormData) => {
