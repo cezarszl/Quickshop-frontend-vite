@@ -4,6 +4,7 @@ import { FaStar, FaTrash } from "react-icons/fa";
 import { useFavoriteStore } from "@/stores/favoriteStore";
 import { useLoginStore } from "@/stores/loginStore";
 import { Link } from "react-router-dom";
+import NotLoggedIn from "./notloggedin/NotLoggedIn";
 
 const Favorites: React.FC = () => {
   const { favorites, fetchFavorites, removeFavorite } = useFavoriteStore();
@@ -14,11 +15,7 @@ const Favorites: React.FC = () => {
   }, [fetchFavorites]);
 
   if (!user) {
-    return (
-      <div className={styles.emptyFavorites}>
-        <h2>You are not logged in.</h2>
-      </div>
-    );
+    return <NotLoggedIn />;
   }
 
   if (favorites.length === 0) {
