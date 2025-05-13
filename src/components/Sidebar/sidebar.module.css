@@ -9,6 +9,7 @@
   position: sticky;
   top: 0;
   left: 0;
+  overflow-y: auto; 
 }
 
 .sidebarHeader {
@@ -39,11 +40,6 @@
   border-top: 1px solid #f0f0f0;
 }
 
-.promoLink {
-  display: block;
-  text-decoration: none;
-  width: 100%;
-}
 
 .newThisWeekButton {
   background-color: #000;
