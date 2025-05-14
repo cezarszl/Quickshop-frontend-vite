@@ -17,6 +17,7 @@ Welcome to the **QuickShop** frontend repository – a modern e-commerce fronten
 - 🧺 Persistent cart for guests and users
 - 🔐 JWT-based protected routes
 - 📄 My Orders page to view order history
+- 📱 Fully responsive design for mobile and tablet devices
 
 ## 🧪 Test Card (Stripe)
 
@@ -54,4 +55,4 @@ This project connects to the [QuickShop API](https://github.com/cezarszl/QuickSh
 
 ---
 
-> 🚧 The project is still evolving, and future improvements include better error handling, full mobile responsiveness, and admin-level tools.
+> 🚧 The project is still evolving. Upcoming improvements include admin-level tools and advanced order analytics.
